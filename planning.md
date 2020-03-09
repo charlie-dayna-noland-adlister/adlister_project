@@ -29,39 +29,39 @@ Stories:
 
 DATABASE:
 	User:
-		1. Id
-		2. Username
-		3. Email
-		4. Password
-		5. User Image
-		6. User_Review-Reputation
-		7.  Users_Followed
-		8. Times_Reported
-		9. Number_Ads_Reported
-		10. Number_Reviews
-		11. Wishlist
-		12. ZIpcode
-		13. IsAdmin
+		COMPLETE 1. Id
+		COMPLETE 2. Username
+		COMPLETE 3. Email
+		COMPLETE 4. Password
+		COMPLETE 5. User Image
+		COMPLETE 6. User_Review_Reputation
+		COMPLETE 7.  Users_Followed
+		COMPLETE 8. Times_Reported
+		COMPLETE 9. Number_Ads_Reported
+		COMPLETE 10. Number_Reviews
+		COMPLETE 11. Wishlist
+		COMPLETE 12. Zipcode
+		COMPLETE 13. is_admin
 	Ad:
 		COMPLETE 1. Title
 		COMPLETE 2. Description
-		3. Image
+		COMPLETE 3. Image
 		COMPLETE 4. Id
 		COMPLETE 5. User Id 
 		COMPLETE 6. Price
-	`	7. Date Posted?
-		8. Review Average(Derived From Review/ Rating Points)
-		9. Category
-		10. Quantity_Reported
-		11. Users_Reported
+	`	COMPLETE 7. Date Posted?
+		COMPLETE 8. Review Average(Derived From Review/ Rating Points)
+		COMPLETE 9. Category
+		COMPLETE 10. Quantity_Reported
+		COMPLETED 11. Users_Reported
 		
 	Review:
-		1. Ad_Id
-		2. User_Id
-		3. Text Rating
-		4. Point Rating.
-		5. Attached Picture
-		6. Id
+		COMPLETE 1. Ad_Id
+		COMPLETE 2. User_Id
+		COMPLETE 3. Review_Text
+		COMPLETE 4. Point Rating.
+		COMPLETE 5. Attached Picture
+		COMPLETE 6. Id
 
 DESIGN:
 		Models:
