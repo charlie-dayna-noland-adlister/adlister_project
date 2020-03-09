@@ -14,8 +14,10 @@ CREATE TABLE users (
 CREATE TABLE ads (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
-    title VARCHAR(240) NOT NULL,
-    description TEXT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(240) NOT NULL,
+    price INT UNSIGNED NOT NULL,
+    date_posted DATE
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE

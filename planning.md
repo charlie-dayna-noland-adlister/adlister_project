@@ -7,7 +7,8 @@ Have to Do:
 3. Interact with an API.
 
 Stories:
-	Admin: 		1. CRUD on Ads
+	Admin: 		
+	    1. CRUD on Ads
 		2. CRUD on Users.
 
 	User:
@@ -42,12 +43,12 @@ DATABASE:
 		12. ZIpcode
 		13. IsAdmin
 	Ad:
-		1. Title
-		2. Description
+		COMPLETE 1. Title
+		COMPLETE 2. Description
 		3. Image
-		4. Id
-		5. User Id
-		6. Price
+		COMPLETE 4. Id
+		COMPLETE 5. User Id 
+		COMPLETE 6. Price
 	`	7. Date Posted?
 		8. Review Average(Derived From Review/ Rating Points)
 		9. Category
