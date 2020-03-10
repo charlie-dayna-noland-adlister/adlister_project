@@ -40,7 +40,7 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
-        String query = "INSERT INTO users(username, email, password, image_text, user_avr, users_followed, times_reported, num_ads_reported, num_reviews, wishlist, zipcode, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users(username, email, password, image_text, user_avr, times_reported, num_ads_reported, num_reviews, zipcode, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
@@ -49,16 +49,12 @@ public class MySQLUsersDao implements Users {
             stmt.setString(3, hash);
             stmt.setString(4, user.getProfileImageText());
             stmt.setInt(5, user.getAverageRating());
-            String usersFollowedString = String.join(",", user.getUsersFollowedList());
-            stmt.setString(6, usersFollowedString);
-            stmt.setInt(7, user.getTimesReported());
-            stmt.setInt(8, user.getNumAdsReported());
-            stmt.setInt(9, user.getNumReviews());
-            String wishListString = String.join(",", user.getWishList());
-            stmt.setString(10, wishListString);
-            stmt.setInt(11, user.getZipcode());
+            stmt.setInt(6, user.getTimesReported());
+            stmt.setInt(7, user.getNumAdsReported());
+            stmt.setInt(8, user.getNumReviews());
+            stmt.setInt(9, user.getZipcode());
             int admin = user.isAdmin() ? 1 : 0;
-            stmt.setInt(12, admin);
+            stmt.setInt(10, admin);
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
