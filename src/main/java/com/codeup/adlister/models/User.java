@@ -14,13 +14,12 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Blob profileImageBlob;
-    private Image profileImageText;
+    private String profileImageText;
     private int averageRating;
     private List<String> usersFollowedList;
     private int timesReported;
     private int numAdsReported;
-    private int num_reviews;
+    private int numReviews;
     private List<String> wishList;
     private int zipcode;
     private boolean isAdmin;
@@ -28,65 +27,35 @@ public class User {
 
     public User() {}
 //FROM THE DATABASE
-    public User(long id, String username, String email, String password, Blob profileImageBlob, Image profileImageText, int averageRating, List<String> usersFollowedList, int timesReported, int numAdsReported, int num_reviews, List<String> wishList, int zipcode, boolean isAdmin) {
+    public User(long id, String username, String email, String password, String profileImageText, int averageRating, List<String> usersFollowedList, int timesReported, int numAdsReported, int numReviews, List<String> wishList, int zipcode, boolean isAdmin) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.profileImageBlob = profileImageBlob;
         this.profileImageText = profileImageText;
         this.averageRating = averageRating;
         this.usersFollowedList = usersFollowedList;
         this.timesReported = timesReported;
         this.numAdsReported = numAdsReported;
-        this.num_reviews = num_reviews;
+        this.numReviews = numReviews;
         this.wishList = wishList;
         this.zipcode = zipcode;
         this.isAdmin = isAdmin;
     }
 //FROM THE APP VIEW
-    public User(String username, String email, String password, Blob profileImageBlob, Image profileImageText, int zipcode, boolean isAdmin) {
+    public User(String username, String email, String password, String profileImageText, int zipcode, boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.password = password;
-//        this.profileImageBlob = new Blob();
-        this.profileImageText = new Image() {
-            @Override
-            public int getWidth(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public int getHeight(ImageObserver observer) {
-                return 0;
-            }
-
-            @Override
-            public ImageProducer getSource() {
-                return null;
-            }
-
-            @Override
-            public Graphics getGraphics() {
-                return null;
-            }
-
-            @Override
-            public Object getProperty(String name, ImageObserver observer) {
-                return null;
-            }
-        };
+        this.profileImageText = profileImageText;
         this.averageRating = 3;
         this.usersFollowedList = new ArrayList<>();
         this.timesReported = 0;
         this.numAdsReported = 0;
-        this.num_reviews = 0;
+        this.numReviews = 0;
         this.wishList = new ArrayList<>();
         this.zipcode = zipcode;
         this.isAdmin = isAdmin;
-    }
-
-    public User(String username, String email, String password) {
     }
 
     public long getId() {
@@ -129,11 +98,11 @@ public class User {
         this.profileImageBlob = profileImageBlob;
     }
 
-    public Image getProfileImageText() {
+    public String getProfileImageText() {
         return profileImageText;
     }
 
-    public void setProfileImageText(Image profileImageText) {
+    public void setProfileImageText(String profileImageText) {
         this.profileImageText = profileImageText;
     }
 
@@ -169,12 +138,12 @@ public class User {
         this.numAdsReported = numAdsReported;
     }
 
-    public int getNum_reviews() {
-        return num_reviews;
+    public int getNumReviews() {
+        return numReviews;
     }
 
-    public void setNum_reviews(int num_reviews) {
-        this.num_reviews = num_reviews;
+    public void setNumReviews(int numReviews) {
+        this.numReviews = numReviews;
     }
 
     public List<String> getWishList() {
@@ -198,6 +167,6 @@ public class User {
     }
 
     public void setAdmin(boolean admin) {
-        isAdmin = admin;
+        this.isAdmin = admin;
     }
 }
