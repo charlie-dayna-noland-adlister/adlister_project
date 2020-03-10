@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,28 +36,69 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long insert(Ad ad) {
+    public int insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(user_id, title, description, price, date_posted) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
+            stmt.setDouble(4, ad.getPrice());
+            stmt.setString(5, ad.getDatePosted());
+
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return rs.getLong(1);
+            return rs.getInt(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+        int adId = rs.getInt("id");
+
+        ArrayList<Integer> categoryArr = new ArrayList<>();
+        try {
+            String categoryId = "SELECT categories_id FROM ads_categories WHERE ads_id = " + adId;
+            PreparedStatement stmt = connection.prepareStatement(categoryId, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.executeUpdate();
+            ResultSet resSet = stmt.getGeneratedKeys();
+            resSet.next();
+            while (resSet.next()){
+                categoryArr.add(resSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
+        }
+
+        ArrayList<Integer> reportsArr = new ArrayList<>();
+        try {
+            String reportsId = "SELECT reported_user_id FROM ads_reported_users WHERE ads_id = " + adId;
+            PreparedStatement stmt = connection.prepareStatement(reportsId, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.executeUpdate();
+            ResultSet resSet = stmt.getGeneratedKeys();
+            resSet.next();
+            while (resSet.next()){
+                reportsArr.add(resSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
+        }
+
         return new Ad(
-            rs.getLong("id"),
+            rs.getInt("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+            rs.getDouble("price"),
+            rs.getString("datePosted"),
+            rs.getInt("reviewAvr"),
+            categoryArr,
+            rs.getInt("quantityReported"),
+            reportsArr
         );
     }
 
@@ -70,5 +108,21 @@ public class MySQLAdsDao implements Ads {
             ads.add(extractAd(rs));
         }
         return ads;
+    }
+
+
+
+
+
+
+
+    private void addCategories (List<Integer> categories, int ad_id) throws SQLException {
+        for (Integer catId:categories){
+            String addCat = "INSERT INTO ads_categories (ads_id, categories_id) VALUES (?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(addCat, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, ad_id);
+            stmt.setInt(2, catId);
+            stmt.executeUpdate();
+        }
     }
 }

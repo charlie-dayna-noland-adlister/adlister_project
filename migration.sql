@@ -161,6 +161,11 @@ VALUES (1, 'Yippie', 'yippie add yippie', 23.99, '2020-01-30', 'https://www.goog
        (2, 'Yippie Yeehaw', 'yippie add yippie', 23.99, '2020-01-30', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBob_Saget&psig=AOvVaw1SWTbFNjcu3irZSFHI7CDF&ust=1583959130621000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDU79zhkOgCFQAAAAAdAAAAABAD', 5,  2),
        (4, 'Yippie', 'yippie add yippie uuppie', 23.99, '2020-01-30', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBob_Saget&psig=AOvVaw1SWTbFNjcu3irZSFHI7CDF&ust=1583959130621000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDU79zhkOgCFQAAAAAdAAAAABAD', 3,  0);
 
+INSERT INTO categories (type)
+VALUES ('cats'),
+        ('money'),
+        ('games');
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
