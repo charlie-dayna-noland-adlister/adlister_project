@@ -1,13 +1,7 @@
 package com.codeup.adlister.models;
 
-import com.mysql.cj.jdbc.Blob;
-
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.awt.*;
 
 public class User {
     private long id;
@@ -88,14 +82,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Blob getProfileImageBlob() {
-        return profileImageBlob;
-    }
-
-    public void setProfileImageBlob(Blob profileImageBlob) {
-        this.profileImageBlob = profileImageBlob;
     }
 
     public String getProfileImageText() {
