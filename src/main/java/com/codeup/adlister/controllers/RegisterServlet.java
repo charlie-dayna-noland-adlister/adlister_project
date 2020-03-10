@@ -9,33 +9,60 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-@WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") != null) {
+            response.sendRedirect("/profile");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        return;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String passwordConfirmation = request.getParameter("confirm_password");
-
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
-
-        if (inputHasErrors) {
-            response.sendRedirect("/register");
+        if (request.getSession().getAttribute("user") != null) {
+            //Maybe some erroe redirect?
             return;
         }
-
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        //CONSIDER HASHING HERE?
+        String password = request.getParameter("password");
+        String passwordConfirmation = request.getParameter("confirm_password");
+        String zipcode = request.getParameter("zipcode");
+        // validate input
+//        boolean inputHasErrors = username.isEmpty()
+//            || email.isEmpty()
+//            || password.isEmpty()
+//            || (!password.equals(passwordConfirmation));
+//
+//        if (inputHasErrors) {
+//            response.sendRedirect("/register");
+//            return;
+//        }
+        //NOT MINE ^^^^
+        String pString = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)[a-zA-Z\\d]{6,}$";
+        Pattern pattern = Pattern.compile(pString);
+        Matcher matcher = pattern.matcher(password);
+        if (username.matches("\\W+") || !matcher.matches() || !password.equals(password) || !email.matches(".+@.+\\.[a-z]{3,4}") || !zipcode.matches("[0-9]{5}")) {
+            //CHANGE TO ERROR HANDLING
+            return;
+        }
+        //IS MINE BUT TEST ^^^^
         // create and save a new user
-        User user = new User(username, email, password);
+        User user = new User(
+                username,
+                email,
+                password,
+                request.getParameter("fileupload"), //change this name(id),
+                Integer.parseInt(zipcode)
+        );
         DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
+        request.getSession().setAttribute("user", user);
+        response.sendRedirect("/profile");
     }
 }

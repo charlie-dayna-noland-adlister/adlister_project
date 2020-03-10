@@ -54,8 +54,7 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `image` BLOB NULL,
-  `image_text` LONGTEXT NULL,
+  `image_text` VARCHAR(100) NULL,
   `user_avr` TINYINT(6) UNSIGNED NOT NULL,
   `users_followed` LONGTEXT NULL,
   `times_reported` INT UNSIGNED NOT NULL,
@@ -63,16 +62,12 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
   `num_reviews` INT UNSIGNED NOT NULL,
   `wishlist` LONGTEXT NULL,
   `zipcode` INT UNSIGNED NOT NULL,
-  `isAdmin` CHAR(1) NOT NULL,
+  `is_admin` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
-  CONSTRAINT `fk_users_ads1`
-    FOREIGN KEY (`id`)
-    REFERENCES `adlister_database`.`ads` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+
 ENGINE = InnoDB;
 
 
