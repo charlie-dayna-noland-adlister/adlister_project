@@ -15,14 +15,13 @@ public class ListAdsDao implements Ads {
         return ads;
     }
 
-    public Long insert(Ad ad) {
-        // make sure we have ads
+    public int insert(Ad ad) {
         if (ads == null) {
             ads = generateAds();
         }
         // we'll assign an "id" here based on the size of the ads list
         // really the dao would handle this
-        ad.setId((long) ads.size());
+        ad.setId((int) ads.size());
         ads.add(ad);
         return ad.getId();
     }
@@ -33,25 +32,38 @@ public class ListAdsDao implements Ads {
             1,
             1,
             "playstation for sale",
-            "This is a slightly used playstation"
+            "This is a slightly used playstation",
+            89.00,
+            "03/20/20",
+            "games, console, playstation"
         ));
         ads.add(new Ad(
             2,
             1,
             "Super Nintendo",
-            "Get your game on with this old-school classic!"
+            "Get your game on with this old-school classic!",
+            59.00,
+            "01/15/20",
+            "games, old, supernintendo"
         ));
         ads.add(new Ad(
             3,
             2,
             "Junior Java Developer Position",
-            "Minimum 7 years of experience required. You will be working in the scripting language for Java, JavaScript"
+            "Minimum 7 years of experience required. You will be working in the scripting language for Java, " +
+                    "JavaScript",
+            85000,
+            "02/03/20",
+            "Job, Developer, Java, Position"
         ));
         ads.add(new Ad(
             4,
             2,
             "JavaScript Developer needed",
-            "Must have strong Java skills"
+            "Must have strong Java skills",
+            75000,
+            "02/15/20",
+            "Job, Developer, JavaScript, Position"
         ));
         return ads;
     }

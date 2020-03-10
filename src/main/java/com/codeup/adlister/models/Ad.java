@@ -60,7 +60,38 @@ public class Ad {
         this.usersReported = usersReported;
     }
 
-  //ID VARIABLE
+    // WITH AD ID without quantity and users reported
+    public Ad(int id, int userId, String title, String description, double price, String datePosted,
+              String categoryId) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.datePosted = datePosted;
+        this.categoryId = categoryId;
+    }
+    // WITHOUT AD ID, quantity and users reported
+    public Ad(int userId, String title, String description, double price, String datePosted,
+              String categoryId) {
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.datePosted = datePosted;
+        this.categoryId = categoryId;
+    }
+
+
+    public Ad(long id, String title, String description, String price, String categoryId) {
+        this.id = (int) id;
+        this.title = title;
+        this.description = description;
+        this.price = Integer.parseInt(String.valueOf(price));
+        this.categoryId = categoryId;
+    }
+
+    //ID VARIABLE
     public int getId() {
         return id;
     }

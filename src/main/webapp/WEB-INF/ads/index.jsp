@@ -11,11 +11,23 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
-
+    
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>${ad.title}</h2>
+                <h6>${ad.reviewAvr}</h6>
+                <p>${ad.description}</p>
+                <h6>${ad.price}</h6>
+                <small>${ad.datePosted}</small>
+                <p>${ad.categoryId}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p>${ad.quantityReported}</p>
+                <p>${ad.usersReported}</p>
+            </div>
         </div>
     </c:forEach>
 </div>
