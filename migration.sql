@@ -66,12 +66,8 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
-  CONSTRAINT `fk_users_ads1`
-    FOREIGN KEY (`id`)
-    REFERENCES `adlister_database`.`ads` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+
 ENGINE = InnoDB;
 
 

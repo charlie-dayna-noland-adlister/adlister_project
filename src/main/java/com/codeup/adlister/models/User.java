@@ -37,7 +37,7 @@ public class User {
         this.isAdmin = isAdmin;
     }
 //FROM THE APP VIEW
-    public User(String username, String email, String password, String profileImageText, int zipcode, boolean isAdmin) {
+    public User(String username, String email, String password, String profileImageText, int zipcode) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -49,7 +49,7 @@ public class User {
         this.numReviews = 0;
         this.wishList = new ArrayList<>();
         this.zipcode = zipcode;
-        this.isAdmin = isAdmin;
+        this.isAdmin = false;
     }
 
     public long getId() {
