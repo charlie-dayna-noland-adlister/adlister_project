@@ -20,28 +20,6 @@ GRANT ALL ON adlister_database.* TO 'adlister_user'@'localhost';
 CREATE SCHEMA IF NOT EXISTS `adlister_database` DEFAULT CHARACTER SET utf8 ;
 USE `adlister_database` ;
 
--- -----------------------------------------------------
--- Table `adlister_database`.`ads`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `adlister_database`.`ads` ;
-
-CREATE TABLE IF NOT EXISTS `adlister_database`.`ads` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` INT UNSIGNED NOT NULL,
-  `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(240) NOT NULL,
-  `price` DOUBLE UNSIGNED NOT NULL,
-  `date_posted` DATE NOT NULL,
-  `image_blob` BLOB NULL,
-  `image_text` LONGTEXT NULL,
-  `review_avr` TINYINT(6) UNSIGNED NULL,
-  `category_id` VARCHAR(50) NOT NULL,
-  `quantity_reported` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `adlister_database`.`users`
@@ -66,6 +44,27 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 
 ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `adlister_database`.`ads`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `adlister_database`.`ads` ;
+
+CREATE TABLE IF NOT EXISTS `adlister_database`.`ads` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(240) NOT NULL,
+  `price` DOUBLE UNSIGNED NOT NULL,
+  `date_posted` DATE NOT NULL,
+  `image_text` LONGTEXT NULL,
+  `review_avr` TINYINT(6) UNSIGNED NULL,
+  `quantity_reported` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
@@ -157,7 +156,10 @@ DROP TABLE IF EXISTS `adlister_database`.`users_ads` ;
     FOREIGN KEY (ads_id) REFERENCES ads (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
-
+INSERT INTO ads (user_id, title, description, price, date_posted, image_text, review_avr, quantity_reported)
+VALUES (1, 'Yippie', 'yippie add yippie', 23.99, '2020-01-30', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBob_Saget&psig=AOvVaw1SWTbFNjcu3irZSFHI7CDF&ust=1583959130621000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDU79zhkOgCFQAAAAAdAAAAABAD', 3,  65),
+       (2, 'Yippie Yeehaw', 'yippie add yippie', 23.99, '2020-01-30', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBob_Saget&psig=AOvVaw1SWTbFNjcu3irZSFHI7CDF&ust=1583959130621000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDU79zhkOgCFQAAAAAdAAAAABAD', 5,  2),
+       (4, 'Yippie', 'yippie add yippie uuppie', 23.99, '2020-01-30', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBob_Saget&psig=AOvVaw1SWTbFNjcu3irZSFHI7CDF&ust=1583959130621000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDU79zhkOgCFQAAAAAdAAAAABAD', 3,  0);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
