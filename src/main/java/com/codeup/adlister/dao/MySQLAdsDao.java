@@ -116,14 +116,13 @@ public class MySQLAdsDao implements Ads {
 
 
 
-    private void addCategories (List<Integer> categories) throws SQLException {
-        String addCat = "INSERT INTO ads_categories (ads_id, categories_id) VALUES (?, ?)";
-        PreparedStatement stmt = connection.prepareStatement(addCat, Statement.RETURN_GENERATED_KEYS);
-        stmt.setInt(1, );
-        stmt.setInt(2, getTitle());
-
-        stmt.executeUpdate();
-        ResultSet resSet = stmt.getGeneratedKeys();
-        resSet.next();
+    private void addCategories (List<Integer> categories, int ad_id) throws SQLException {
+        for (Integer catId:categories){
+            String addCat = "INSERT INTO ads_categories (ads_id, categories_id) VALUES (?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(addCat, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, ad_id);
+            stmt.setInt(2, catId);
+            stmt.executeUpdate();
+        }
     }
 }
