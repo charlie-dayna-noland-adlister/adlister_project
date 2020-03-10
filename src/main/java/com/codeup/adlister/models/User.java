@@ -1,6 +1,8 @@
 package com.codeup.adlister.models;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class User {
@@ -151,4 +153,9 @@ public class User {
     public void setAdmin(boolean admin) {
         this.isAdmin = admin;
     }
+
+    Date now = new Date();
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+    String mysqlDateString = formatter.format(now);
 }
