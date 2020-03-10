@@ -4,7 +4,7 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Create a New Review" />
     </jsp:include>
-    <%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">--%>
+
     <style><%@include file="/WEB-INF/css/style.css"%></style>
 </head>
 <body>
