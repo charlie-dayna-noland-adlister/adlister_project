@@ -6,6 +6,7 @@ import com.mysql.cj.jdbc.Driver;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,9 +69,36 @@ public class MySQLUsersDao implements Users {
         if (!rs.next()) {
             return null;
         }
-        List<String> followedList = Arrays.asList(rs.getString("users_followed").split(","));
-        List<String> wishList = Arrays.asList(rs.getString("wishList").split(","));
+        List<Integer> followedList = new ArrayList<>();
+        List<Integer> wishList = new ArrayList<>();
+        long userId = rs.getLong("id");
+
+        try {
+            String query =  String.format("SELECT followed_id FROM users_followed WHERE user_id = %d", userId);
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet resSet = stmt.executeQuery();
+            if(resSet.next()) {
+                resSet.next();
+                while(resSet.next()) {
+                    followedList.add(resSet.getInt("1"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
+        try {
+            String query =  String.format("SELECT ads_id FROM users_ads WHERE user_id = %d", userId);
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet resSet = stmt.executeQuery();
+            resSet.next();
+            while(resSet.next()) {
+                wishList.add(resSet.getInt("1"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
         boolean isAdmin = 1 == rs.getInt("is_admin");
+
         return new User(
                 rs.getLong("id"),
                 rs.getString("username"),
