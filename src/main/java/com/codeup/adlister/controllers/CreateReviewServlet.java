@@ -21,14 +21,14 @@ public class CreateReviewServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-        request.getRequestDispatcher("/WEB-INF/reviews/createReview.jsp")
+        request.getRequestDispatcher("/WEB-INF/partials/reviews.jsp")
                 .forward(request, response);
         return;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
-//        Review review = (Review) request.getSession().getAttribute("review"); //reviw
+//        Review review = (Review) request.getSession().getAttribute("review"); //review
         Ad ad = (Ad) request.getSession().getAttribute("ad"); //ad
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
