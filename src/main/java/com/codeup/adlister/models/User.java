@@ -27,7 +27,7 @@ public class User {
 
 
     public User() {}
-
+//FROM THE DATABASE
     public User(long id, String username, String email, String password, Blob profileImageBlob, Image profileImageText, int averageRating, List<String> usersFollowedList, int timesReported, int numAdsReported, int num_reviews, List<String> wishList, int zipcode, boolean isAdmin) {
         this.id = id;
         this.username = username;
@@ -44,12 +44,12 @@ public class User {
         this.zipcode = zipcode;
         this.isAdmin = isAdmin;
     }
-
+//FROM THE APP VIEW
     public User(String username, String email, String password, Blob profileImageBlob, Image profileImageText, int zipcode, boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.profileImageBlob = new Blob();
+//        this.profileImageBlob = new Blob();
         this.profileImageText = new Image() {
             @Override
             public int getWidth(ImageObserver observer) {
@@ -84,6 +84,9 @@ public class User {
         this.wishList = new ArrayList<>();
         this.zipcode = zipcode;
         this.isAdmin = isAdmin;
+    }
+
+    public User(String username, String email, String password) {
     }
 
     public long getId() {
