@@ -125,7 +125,7 @@ DROP TABLE IF EXISTS `adlister_database`.`users_followed` ;
  CREATE TABLE IF NOT EXISTS `adlister_database`.`users_followed`
 (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    users_id   INT UNSIGNED,
+    user_id   INT UNSIGNED,
     followed_id INT UNSIGNED,
     PRIMARY KEY (id),
     UNIQUE INDEX `id_UNIQUE` (`id` ASC),

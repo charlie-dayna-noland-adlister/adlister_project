@@ -6,6 +6,7 @@ import com.mysql.cj.jdbc.Driver;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
-        String query = "INSERT INTO users(username, email, password, image_text, user_avr, users_followed, times_reported, num_ads_reported, num_reviews, wishlist, zipcode, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users(username, email, password, image_text, user_avr, times_reported, num_ads_reported, num_reviews, zipcode, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
@@ -49,16 +50,12 @@ public class MySQLUsersDao implements Users {
             stmt.setString(3, hash);
             stmt.setString(4, user.getProfileImageText());
             stmt.setInt(5, user.getAverageRating());
-            String usersFollowedString = String.join(",", user.getUsersFollowedList());
-            stmt.setString(6, usersFollowedString);
-            stmt.setInt(7, user.getTimesReported());
-            stmt.setInt(8, user.getNumAdsReported());
-            stmt.setInt(9, user.getNumReviews());
-            String wishListString = String.join(",", user.getWishList());
-            stmt.setString(10, wishListString);
-            stmt.setInt(11, user.getZipcode());
+            stmt.setInt(6, user.getTimesReported());
+            stmt.setInt(7, user.getNumAdsReported());
+            stmt.setInt(8, user.getNumReviews());
+            stmt.setInt(9, user.getZipcode());
             int admin = user.isAdmin() ? 1 : 0;
-            stmt.setInt(12, admin);
+            stmt.setInt(10, admin);
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -72,9 +69,36 @@ public class MySQLUsersDao implements Users {
         if (!rs.next()) {
             return null;
         }
-        List<String> followedList = Arrays.asList(rs.getString("users_followed").split(","));
-        List<String> wishList = Arrays.asList(rs.getString("wishList").split(","));
+        List<Integer> followedList = new ArrayList<>();
+        List<Integer> wishList = new ArrayList<>();
+        long userId = rs.getLong("id");
+
+        try {
+            String query =  String.format("SELECT followed_id FROM users_followed WHERE user_id = %d", userId);
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet resSet = stmt.executeQuery();
+            if(resSet.next()) {
+                resSet.next();
+                while(resSet.next()) {
+                    followedList.add(resSet.getInt("1"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
+        try {
+            String query =  String.format("SELECT ads_id FROM users_ads WHERE user_id = %d", userId);
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet resSet = stmt.executeQuery();
+            resSet.next();
+            while(resSet.next()) {
+                wishList.add(resSet.getInt("1"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
         boolean isAdmin = 1 == rs.getInt("is_admin");
+
         return new User(
                 rs.getLong("id"),
                 rs.getString("username"),

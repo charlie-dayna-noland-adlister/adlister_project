@@ -12,18 +12,18 @@ public class User {
     private String password;
     private String profileImageText;
     private int averageRating;
-    private List<String> usersFollowedList;
+    private List<Integer> usersFollowedList;
     private int timesReported;
     private int numAdsReported;
     private int numReviews;
-    private List<String> wishList;
+    private List<Integer> wishList;
     private int zipcode;
     private boolean isAdmin;
 
 
     public User() {}
 //FROM THE DATABASE
-    public User(long id, String username, String email, String password, String profileImageText, int averageRating, List<String> usersFollowedList, int timesReported, int numAdsReported, int numReviews, List<String> wishList, int zipcode, boolean isAdmin) {
+    public User(long id, String username, String email, String password, String profileImageText, int averageRating, List<Integer> usersFollowedList, int timesReported, int numAdsReported, int numReviews, List<Integer> wishList, int zipcode, boolean isAdmin) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -98,11 +98,11 @@ public class User {
         this.averageRating = averageRating;
     }
 
-    public List<String> getUsersFollowedList() {
+    public List<Integer> getUsersFollowedList() {
         return usersFollowedList;
     }
 
-    public void setUsersFollowedList(List<String> usersFollowedList) {
+    public void setUsersFollowedList(List<Integer> usersFollowedList) {
         this.usersFollowedList = usersFollowedList;
     }
 
@@ -130,11 +130,11 @@ public class User {
         this.numReviews = numReviews;
     }
 
-    public List<String> getWishList() {
+    public List<Integer> getWishList() {
         return wishList;
     }
 
-    public void setWishList(List<String> wishList) {
+    public void setWishList(List<Integer> wishList) {
         this.wishList = wishList;
     }
 
@@ -153,9 +153,4 @@ public class User {
     public void setAdmin(boolean admin) {
         this.isAdmin = admin;
     }
-
-    Date now = new Date();
-    String pattern = "yyyy-MM-dd";
-    SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-    String mysqlDateString = formatter.format(now);
 }
