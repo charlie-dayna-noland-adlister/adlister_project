@@ -36,10 +36,11 @@ public class CreateReviewServlet extends HttpServlet {
         }
         Review review = new Review(
                 user.getId(), // for now we'll hardcode the user id
-                request.getParameter("review_text"), //do these have to be written out the same as the mysql? review_text
+                request.getParameter("reviewText"), //do these have to be written out the same as the mysql? review_text
                 Integer.parseInt(request.getParameter("rating")),
-                request.getParameter("image_text"), //image_text
-                ad.getId() //should this be hardcoded too?
+                request.getParameter("imageText"), //image_text
+//                ad.getId() //should this be hardcoded too?
+                1
         );
         DaoFactory.getReviewsDao().insert(review);
         response.sendRedirect("/ads");
