@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Review;
 import com.codeup.adlister.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -27,18 +28,20 @@ public class CreateReviewServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
+//        Review review = (Review) request.getSession().getAttribute("review"); //reviw
+        Ad ad = (Ad) request.getSession().getAttribute("ad"); //ad
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
             return;
         }
         Review review = new Review(
                 user.getId(), // for now we'll hardcode the user id
-                ad.getId(), //should this be hardcoded too?
                 request.getParameter("review_text"), //do these have to be written out the same as the mysql? review_text
-                request.getParameter("rating"),
-                request.getParameter("image_text") //image_text
+                Integer.parseInt(request.getParameter("rating")),
+                request.getParameter("image_text"), //image_text
+                ad.getId() //should this be hardcoded too?
         );
-        DaoFactory.getReviewsDao().insert(reviews);
+        DaoFactory.getReviewsDao().insert(review);
         response.sendRedirect("/ads");
         return;
     }

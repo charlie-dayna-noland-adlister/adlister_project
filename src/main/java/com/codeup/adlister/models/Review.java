@@ -2,16 +2,16 @@ package com.codeup.adlister.models;
 
 public class Review {
     private int id;
-    private int userId;
+    private long userId;
     private String reviewText;
     private int rating;
     //BLOB PLACEHOLDER private Blob image;
     private String imageText;
-    private int adId;
+    private long adId;
 
     public Review(){}
 
-    public Review(int id, int userId, String reviewText, int rating, String imageText, int adId){
+    public Review(int id, long userId, String reviewText, int rating, String imageText, long adId){
         this.id = id;
         this.userId = userId;
         this.reviewText = reviewText;
@@ -20,7 +20,7 @@ public class Review {
         this.adId = adId;
     }
 
-    public Review(int userId, String reviewText, int rating, String imageText, int adId){
+    public Review(long userId, String reviewText, int rating, String imageText, long adId){
         this.userId = userId;
         this.reviewText = reviewText;
         this.rating = rating;
@@ -28,7 +28,7 @@ public class Review {
         this.adId = adId;
     }
 
-    public Review(int userId, String reviewText, int rating, int adId){
+    public Review(long userId, String reviewText, int rating, long adId){
         this.userId = userId;
         this.reviewText = reviewText;
         this.rating = rating;
@@ -51,11 +51,11 @@ public class Review {
         this.reviewText = reviewText;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -75,11 +75,11 @@ public class Review {
         this.imageText = imageText;
     }
 
-    public int getAdId() {
+    public long getAdId() {
         return adId;
     }
 
-    public void setAdId(int adId) {
+    public void setAdId(long adId) {
         this.adId = adId;
     }
 }
