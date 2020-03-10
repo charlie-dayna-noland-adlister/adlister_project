@@ -1,11 +1,13 @@
 package com.codeup.adlister.models;
 
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ad {
     //VARIABLES
     private int id;
-    private int userId;
+    private long userId;
     private String title;
     private String description;
     private double price;
@@ -13,14 +15,14 @@ public class Ad {
 //    private Blob image_blob;
 //    private text image;
     private int reviewAvr;
-    private String categoryId;
+    private List<Integer> categoryId;
     private int quantityReported;
-    private String usersReported;
+    private List<Integer> usersReported;
 
 
     // All inclusive constructor
-    public Ad(int id, int userId, String title, String description, double price, String datePosted, int reviewAvr,
-              String categoryId, int quantityReported, String usersReported) {
+    public Ad(int id, long userId, String title, String description, double price, String datePosted, int reviewAvr,
+              List<Integer> categoryId, int quantityReported, List<Integer> usersReported) {
         this.id = id;
         this.userId = userId;
         this.title = title;
@@ -34,8 +36,8 @@ public class Ad {
     }
 
     // No AD ID constructor
-    public Ad(int userId, String title, String description, double price, String datePosted, int reviewAvr,
-              String categoryId, int quantityReported, String usersReported) {
+    public Ad(long userId, String title, String description, double price, String datePosted, int reviewAvr,
+              List<Integer> categoryId, int quantityReported, List<Integer> usersReported) {
         this.userId = userId;
         this.title = title;
         this.description = description;
@@ -48,8 +50,8 @@ public class Ad {
     }
 
     // No ID/NULL capable variables constructor
-    public Ad(int userId, String title, String description, double price, String datePosted,
-              String categoryId, int quantityReported, String usersReported) {
+    public Ad(long userId, String title, String description, double price, String datePosted,
+              List<Integer> categoryId, int quantityReported, List<Integer> usersReported) {
         this.userId = userId;
         this.title = title;
         this.description = description;
@@ -61,8 +63,8 @@ public class Ad {
     }
 
     // WITH AD ID without quantity and users reported
-    public Ad(int id, int userId, String title, String description, double price, String datePosted,
-              String categoryId) {
+    public Ad(int id, long userId, String title, String description, double price, String datePosted,
+              List<Integer> categoryId) {
         this.id = id;
         this.userId = userId;
         this.title = title;
@@ -71,9 +73,10 @@ public class Ad {
         this.datePosted = datePosted;
         this.categoryId = categoryId;
     }
+
     // WITHOUT AD ID, quantity and users reported
-    public Ad(int userId, String title, String description, double price, String datePosted,
-              String categoryId) {
+    public Ad(long userId, String title, String description, double price, String datePosted,
+              List<Integer> categoryId) {
         this.userId = userId;
         this.title = title;
         this.description = description;
@@ -83,12 +86,16 @@ public class Ad {
     }
 
 
-    public Ad(long id, String title, String description, String price, String categoryId) {
-        this.id = (int) id;
+    public Ad(int id, String title, String description, Double price, List<Integer> categoryId) {
+        this.id = id;
         this.title = title;
         this.description = description;
-        this.price = Integer.parseInt(String.valueOf(price));
+        this.price = price;
         this.categoryId = categoryId;
+        this.reviewAvr = 0;
+        this.quantityReported = 0;
+        this.usersReported = new ArrayList<>();
+
     }
 
     //ID VARIABLE
@@ -99,7 +106,7 @@ public class Ad {
         this.id = id;
     }
   //USER ID VARIABLE
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
     public void setUserId(int userId) {
@@ -129,12 +136,12 @@ public class Ad {
     public int getReviewAvr() { return reviewAvr; }
     public void setReviewAvr(int reviewAvr) { this.reviewAvr = reviewAvr; }
   //CATEGORY ID VARIABLE
-    public String getCategoryId() { return categoryId; }
-    public void setCategoryId(String categoryId) { this.categoryId = categoryId; }
+    public List<Integer> getCategoryId() { return categoryId; }
+    public void setCategoryId(List<Integer> categoryId) { this.categoryId = categoryId; }
   //QUANTITY REPORTED VARIABLE
     public int getQuantityReported() { return quantityReported; }
     public void setQuantityReported(int quantityReported) { this.quantityReported = quantityReported; }
   //USERS REPORTED VARIABLE
-    public String getUsersReported() { return usersReported; }
-    public void setUsersReported(String usersReported) { this.usersReported = usersReported; }
+    public List<Integer> getUsersReported() { return usersReported; }
+    public void setUsersReported(List<Integer> usersReported) { this.usersReported = usersReported; }
 }

@@ -44,7 +44,7 @@ public class ListAdsDao implements Ads {
             "Get your game on with this old-school classic!",
             59.00,
             "01/15/20",
-            "games, old, supernintendo"
+            "1, old, supernintendo"
         ));
         ads.add(new Ad(
             3,
