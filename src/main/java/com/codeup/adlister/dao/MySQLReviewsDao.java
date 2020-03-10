@@ -65,7 +65,7 @@ public class MySQLReviewsDao implements Reviews {
         );
     }
 
-    private List<Review> createAdsFromResults(ResultSet rs) throws SQLException {
+    private List<Review> createReviewsFromResults(ResultSet rs) throws SQLException {
         List<Review> reviews = new ArrayList<>();
         while (rs.next()) {
             reviews.add(extractReview(rs));

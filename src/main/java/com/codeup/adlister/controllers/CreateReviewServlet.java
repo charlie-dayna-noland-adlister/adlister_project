@@ -21,7 +21,7 @@ public class CreateReviewServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-        request.getRequestDispatcher("/WEB-INF/ads/review.jsp")
+        request.getRequestDispatcher("/WEB-INF/reviews/createReview.jsp")
                 .forward(request, response);
         return;
     }

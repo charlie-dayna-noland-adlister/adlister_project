@@ -5,7 +5,6 @@ public class Review {
     private long userId;
     private String reviewText;
     private int rating;
-    //BLOB PLACEHOLDER private Blob image;
     private String imageText;
     private long adId;
 
