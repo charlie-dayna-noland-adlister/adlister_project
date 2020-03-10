@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`ads` (
   `review_avr` TINYINT(6) UNSIGNED NULL,
   `category_id` VARCHAR(50) NOT NULL,
   `quantity_reported` INT UNSIGNED NOT NULL,
-  `users_reported` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
@@ -56,11 +55,9 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
   `password` VARCHAR(255) NOT NULL,
   `image_text` VARCHAR(100) NULL,
   `user_avr` TINYINT(6) UNSIGNED NOT NULL,
-  `users_followed` LONGTEXT NULL,
   `times_reported` INT UNSIGNED NOT NULL,
   `num_ads_reported` INT UNSIGNED NOT NULL,
   `num_reviews` INT UNSIGNED NOT NULL,
-  `wishlist` LONGTEXT NULL,
   `zipcode` INT UNSIGNED NOT NULL,
   `is_admin` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`),
@@ -96,8 +93,70 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`reviews` (
     FOREIGN KEY (`ad_id`)
     REFERENCES `adlister_database`.`ads` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+   )
 ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `adlister_database`.`categories` ;
+
+CREATE TABLE IF NOT EXISTS `adlister_database`.`categories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(25) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `type_UNIQUE` (`type` ASC)
+  )
+ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `adlister_database`.`ads_categories` ;
+
+CREATE TABLE IF NOT EXISTS `adlister_database`.`ads_categories` (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    ads_id INT UNSIGNED,
+    categories_id INT UNSIGNED,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (ads_id) REFERENCES ads (id),
+  FOREIGN KEY (categories_id) REFERENCES categories (id),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC)
+  )
+ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `adlister_database`.`users_followed` ;
+
+ CREATE TABLE IF NOT EXISTS `adlister_database`.`users_followed`
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    users_id   INT UNSIGNED,
+    followed_id INT UNSIGNED,
+    PRIMARY KEY (id),
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+    FOREIGN KEY (users_id) REFERENCES users (id),
+    FOREIGN KEY (followed_id) REFERENCES users (id)
+);
+
+DROP TABLE IF EXISTS `adlister_database`.`ads_reported_users` ;
+ CREATE TABLE IF NOT EXISTS `adlister_database`.`ads_reported_users`
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    ads_id  INT UNSIGNED,
+    reported_user_id INT UNSIGNED,
+    PRIMARY KEY (id),
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+    FOREIGN KEY (ads_id) REFERENCES ads (id),
+    FOREIGN KEY (reported_user_id) REFERENCES users (id)
+);
+
+DROP TABLE IF EXISTS `adlister_database`.`users_ads` ;
+ CREATE TABLE IF NOT EXISTS `adlister_database`.`users_ads`
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    ads_id  INT UNSIGNED,
+    user_id INT UNSIGNED,
+    PRIMARY KEY (id),
+    UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+    FOREIGN KEY (ads_id) REFERENCES ads (id),
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
