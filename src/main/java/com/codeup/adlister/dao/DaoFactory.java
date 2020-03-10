@@ -18,4 +18,11 @@ public class DaoFactory {
         }
         return usersDao;
     }
+
+    public static Reviews getReviewsDao() {
+        if (reviewsDao == null) {
+            reviewsDao = new MySQLReviewsDao(config);
+        }
+        return reviewsDao;
+    }
 }

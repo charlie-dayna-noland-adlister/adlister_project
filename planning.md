@@ -62,6 +62,16 @@ DATABASE:
 		COMPLETE 4. Point Rating.
 		COMPLETE 5. Attached Picture
 		COMPLETE 6. Id
+		
+	    | Field       | Type                | Null | Key | Default | Extra          |
+        +-------------+---------------------+------+-----+---------+----------------+
+        | id          | int(10) unsigned    | NO   | PRI | NULL    | auto_increment |
+        | user_id     | int(10) unsigned    | NO   | UNI | NULL    |                |
+        | review_text | varchar(250)        | NO   |     | NULL    |                |
+        | rating      | tinyint(6) unsigned | NO   |     | NULL    |                |
+        | image       | blob                | YES  |     | NULL    |                |
+        | image_text  | longtext            | YES  |     | NULL    |                |
+        | ad_id       | int(10) unsigned    | NO   | MUL | NULL    |               
 
 DESIGN:
 		Models:
