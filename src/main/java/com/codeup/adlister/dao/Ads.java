@@ -12,5 +12,5 @@ public interface Ads {
     List<Ad> all();
     // insert a new ad and return the new ad's id
     int insert(Ad ad);
-    int deleteAd(Ad ad);
+    boolean deleteAd(Ad ad);
 }

@@ -61,18 +61,17 @@ public class AdsIndexServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        super.doDelete(req, resp);
         User user = (User)request.getSession().getAttribute("user");
-        Ad ad = (Ad)request.getSession().getAttribute("ad");
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
             return;
         }
+        Ad ad = (Ad)request.getSession().getAttribute("ad");
         if (ad == null || user.getId() != ad.getUserId()) {
             response.sendRedirect("/ads");
             return;
         }
-        long idOfDeletedAdd = DaoFactory.getAdsDao().deleteAd(ad);
+        boolean isDeleted = DaoFactory.getAdsDao().deleteAd(ad);
         response.sendRedirect("/ads");
         return;
     }

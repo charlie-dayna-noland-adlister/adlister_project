@@ -123,17 +123,27 @@ public class MySQLAdsDao implements Ads {
         }
     }
     @Override
-    public int deleteAd(Ad ad) {
+    public boolean deleteAd(Ad ad) {
         try {
-            String insertQuery = "DELETE FROM ads WHERE id=?;";
-            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            stmt.setLong(1, ad.getId());
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            return rs.getInt(1);
+            String query = "DELETE FROM users_ads WHERE ads_id=?;";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, 10);
+            stmt.execute();
+            query = "DELETE FROM ads_reported_users WHERE ads_id=?;";
+            stmt = connection.prepareStatement(query);
+            stmt.setLong(1, 10);
+            stmt.execute();
+            query = "DELETE FROM ads_categories WHERE ads_id=?;";
+            stmt = connection.prepareStatement(query);
+            stmt.setLong(1, 10);
+            stmt.execute();
+            query = "DELETE FROM ads WHERE id=?;";
+            stmt = connection.prepareStatement(query);
+            stmt.setLong(1, 10);
+            stmt.execute();
+            return stmt.execute();
         } catch (SQLException e) {
-            throw new RuntimeException("Error creating a new ad.", e);
+            throw new RuntimeException("Error deleting an ad.", e);
         }
     }
 }
