@@ -15,7 +15,7 @@ public class Ad {
     private int reviewAvr;
     private List<Long> categoryIdList;
     private int quantityReported;
-    private List<Long> usersReported;
+    private List<Long> usersReportedList;
 
     public Ad() {}
     //Construct Ads from Database(used in program)
@@ -30,7 +30,7 @@ public class Ad {
         this.reviewAvr = reviewAvr;
         this.categoryIdList = categoryIdList;
         this.quantityReported = quantityReported;
-        this.usersReported = usersReported;
+        this.usersReportedList = usersReported;
     }
     //Construct Ads from user form submission(used to push to db when image is provided)
     public Ad(long userId, String title, String description, double price, String datePosted, String imageText, List<Long> categoryIdList) {
@@ -40,10 +40,10 @@ public class Ad {
         this.price = price;
         this.datePosted = datePosted;
         this.imageText = imageText;
-        this.reviewAvr = 0;
+        this.reviewAvr = 3;
         this.categoryIdList = categoryIdList;
         this.quantityReported = 0;
-        this.usersReported = new ArrayList<>();
+        this.usersReportedList = new ArrayList<>();
     }
 //    //Construct Ads from user form submission(used to push to db when image is NOT provided)
 //    public Ad(long userId, String title, String description, double price, List<Long> categoryId) {
@@ -181,8 +181,8 @@ public class Ad {
     public int getQuantityReported() { return quantityReported; }
     public void setQuantityReported(int quantityReported) { this.quantityReported = quantityReported; }
   //USERS REPORTED VARIABLE
-    public List<Long> getUsersReported() { return usersReported; }
-    public void setUsersReported(List<Long> usersReported) { this.usersReported = usersReported; }
+    public List<Long> getUsersReported() { return usersReportedList; }
+    public void setUsersReported(List<Long> usersReported) { this.usersReportedList = usersReported; }
 
     public String getImageText() { return imageText; }
 
