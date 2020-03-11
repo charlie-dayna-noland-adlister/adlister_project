@@ -75,4 +75,10 @@ public class AdsIndexServlet extends HttpServlet {
         response.sendRedirect("/ads");
         return;
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        super.doPut(req, resp);
+
+    }
 }

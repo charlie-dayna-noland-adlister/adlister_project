@@ -29,7 +29,7 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads");
+            stmt = connection.prepareStatement("SELECT * FROM ads;");
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -38,9 +38,9 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public int insert(Ad ad) {
+    public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description, price, date_posted, image_text, review_avr, quantity_reported) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(user_id, title, description, price, date_posted, image_text, review_avr, quantity_reported) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
@@ -54,7 +54,8 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return rs.getInt(1);
+            addCategories(ad);
+            return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
@@ -112,14 +113,13 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-    //WHAT IS THIS BELOW?
-    private void addCategories (List<Integer> categories, int ad_id) throws SQLException {
-        for (Integer catId:categories){
-            String addCat = "INSERT INTO ads_categories (ads_id, categories_id) VALUES (?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(addCat, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, ad_id);
-            stmt.setInt(2, catId);
-            stmt.executeUpdate();
+    private void addCategories (Ad ad) throws SQLException {
+        for(Long catId : ad.getCategoryId()) {
+            String insertStatement = "INSERT INTO ads_categories(ads_id, categories_id) VALUES (?, ?);";
+            PreparedStatement catStmt= connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+            catStmt.setLong(1, ad.getId());
+            catStmt.setLong(1, catId);
+            catStmt.executeUpdate();
         }
     }
     @Override
@@ -127,21 +127,42 @@ public class MySQLAdsDao implements Ads {
         try {
             String query = "DELETE FROM users_ads WHERE ads_id=?;";
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setLong(1, 10);
+            stmt.setLong(1, ad.getId());
             stmt.execute();
             query = "DELETE FROM ads_reported_users WHERE ads_id=?;";
             stmt = connection.prepareStatement(query);
-            stmt.setLong(1, 10);
+            stmt.setLong(1, ad.getId());
             stmt.execute();
             query = "DELETE FROM ads_categories WHERE ads_id=?;";
             stmt = connection.prepareStatement(query);
-            stmt.setLong(1, 10);
+            stmt.setLong(1, ad.getId());
             stmt.execute();
             query = "DELETE FROM ads WHERE id=?;";
             stmt = connection.prepareStatement(query);
-            stmt.setLong(1, 10);
+            stmt.setLong(1, ad.getId());
             stmt.execute();
             return stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting an ad.", e);
+        }
+    }
+    @Override
+    public boolean updateAd(Ad ad) {
+        try {
+            String query = "UPDATE ads SET title = ?, description = ?, price = ?, image_text = ?, WHERE id = ?;";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setDouble(3, ad.getPrice());
+            stmt.setString(4, ad.getImageText());
+            stmt.execute();
+            //delete then update
+            query = "DELETE FROM ads_categories WHERE ads_id=?;";
+            stmt = connection.prepareStatement(query);
+            stmt.setLong(1, ad.getId());
+            stmt.execute();
+            addCategories(ad);
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting an ad.", e);
         }
