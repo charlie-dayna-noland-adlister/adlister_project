@@ -53,6 +53,21 @@ public class User {
         this.zipcode = zipcode;
         this.isAdmin = false;
     }
+    public User(long id, String username, String email, String password, String profileImageText, int zipcode) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.profileImageText = profileImageText;
+        this.averageRating = 3;
+        this.usersFollowedList = new ArrayList<>();
+        this.timesReported = 0;
+        this.numAdsReported = 0;
+        this.numReviews = 0;
+        this.wishList = new ArrayList<>();
+        this.zipcode = zipcode;
+        this.isAdmin = false;
+    }
 
     public long getId() {
         return id;

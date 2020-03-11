@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getSession().getAttribute("user") != null) {
-            //Maybe some erroe redirect?
+            //Maybe some error redirect?
             return;
         }
         String username = request.getParameter("username");
@@ -35,15 +35,6 @@ public class RegisterServlet extends HttpServlet {
         String passwordConfirmation = request.getParameter("confirm_password");
         String zipcode = request.getParameter("zipcode");
         // validate input
-//        boolean inputHasErrors = username.isEmpty()
-//            || email.isEmpty()
-//            || password.isEmpty()
-//            || (!password.equals(passwordConfirmation));
-//
-//        if (inputHasErrors) {
-//            response.sendRedirect("/register");
-//            return;
-//        }
         //NOT MINE ^^^^
         String pString = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)[a-zA-Z\\d]{6,}$";
         Pattern pattern = Pattern.compile(pString);
@@ -61,7 +52,15 @@ public class RegisterServlet extends HttpServlet {
                 request.getParameter("fileupload"), //change this name(id),
                 Integer.parseInt(zipcode)
         );
-        DaoFactory.getUsersDao().insert(user);
+        long userId = DaoFactory.getUsersDao().insert(user);
+        user = new User(
+                userId,
+                username,
+                email,
+                password,
+                request.getParameter("fileupload"), //change this name(id),
+                Integer.parseInt(zipcode)
+        );
         request.getSession().setAttribute("user", user);
         response.sendRedirect("/profile");
     }
