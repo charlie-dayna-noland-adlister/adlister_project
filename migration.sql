@@ -24,9 +24,9 @@ USE `adlister_database` ;
 -- -----------------------------------------------------
 -- Table `adlister_database`.`users`
 -- -----------------------------------------------------
---DROP TABLE IF EXISTS `adlister_database`.`users` ;
+-- DROP TABLE IF EXISTS `adlister_database`.`users` ;
 --
---CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
+-- CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
 --  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 --  `username` VARCHAR(45) NOT NULL,
 --  `email` VARCHAR(100) NOT NULL,
@@ -43,7 +43,7 @@ USE `adlister_database` ;
 --  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
 --  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 --
---ENGINE = InnoDB;
+-- ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `adlister_database`.`ads`
 -- -----------------------------------------------------
