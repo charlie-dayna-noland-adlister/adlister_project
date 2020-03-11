@@ -83,9 +83,6 @@
             </c:forEach>
         </div>
 </div>
-
-
-
 <%--<div class="container">--%>
 <%--    <h1>Here Are all the ads!</h1>--%>
 <%--    --%>
@@ -113,6 +110,5 @@
 <%--</div>--%>
 
 <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
-
 </body>
 </html>

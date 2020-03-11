@@ -12,6 +12,7 @@ public interface Ads {
     List<Ad> all();
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
+    Ad findById(long id);
     boolean deleteAd(Ad ad);
     boolean updateAd(Ad ad);
 }

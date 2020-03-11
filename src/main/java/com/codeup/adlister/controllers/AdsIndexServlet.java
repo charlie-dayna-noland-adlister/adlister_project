@@ -60,19 +60,20 @@ public class AdsIndexServlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User)request.getSession().getAttribute("user");
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        long adId = Long.parseLong(req.getParameter("id"));
+        User user = (User)req.getSession().getAttribute("user");
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
-            response.sendRedirect("/login");
+            resp.sendRedirect("/login");
             return;
         }
-        Ad ad = (Ad)request.getSession().getAttribute("ad");
-        if (ad == null || user.getId() != ad.getUserId()) {
-            response.sendRedirect("/ads");
+        Ad ad = DaoFactory.getAdsDao().findById(adId);
+        if (ad == null || user == null || user.getId() != ad.getUserId()) {
+            resp.sendRedirect("/ads");
             return;
         }
         boolean isDeleted = DaoFactory.getAdsDao().deleteAd(ad);
-        response.sendRedirect("/ads");
+        resp.sendRedirect("/ads");
         return;
     }
 
@@ -89,7 +90,7 @@ public class AdsIndexServlet extends HttpServlet {
             response.sendRedirect("/ads");
             return;
         }
-        boolean isDeleted = DaoFactory.getAdsDao().updateAd(ad);
+        DaoFactory.getAdsDao().updateAd(ad);
         return;
     }
 }
