@@ -15,18 +15,21 @@
     <c:forEach var="ad" items="${ads}">
         <div class="row">
             <div class="col-md-6">
-                <h2>${ad.title}</h2>
-                <h6>${ad.reviewAvr}</h6>
-                <p>${ad.description}</p>
-                <h6>${ad.price}</h6>
-                <small>${ad.datePosted}</small>
-                <p>${ad.categoryId}</p>
+                <h2>Title: ${ad.title}</h2>
+                <h6>Review Average: ${ad.reviewAvr}</h6>
+                <p>Description: ${ad.description}</p>
+                <h6>Price: ${ad.price}</h6>
+                <small>Date Posted: ${ad.datePosted}</small>
+<%--                <p>Categories: ${ad.categoryIdList}</p>--%>
+                <p>ID: ${ad.id}</p>
+                <p>User ID: ${ad.userId}</p>
+                <img src="${ad.imageText}" alt="ad-image"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <p>${ad.quantityReported}</p>
-                <p>${ad.usersReported}</p>
+                <p>Quantity Reported: ${ad.quantityReported}</p>
+<%--                <p>Users Who Reported: ${ad.usersReportedList}</p>--%>
             </div>
         </div>
     </c:forEach>

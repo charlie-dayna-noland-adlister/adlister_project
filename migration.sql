@@ -61,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`ads` (
   `quantity_reported` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (user_id) REFERENCES users (id),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB;
 
