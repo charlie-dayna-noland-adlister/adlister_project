@@ -4,6 +4,7 @@ import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Review;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface Reviews {
@@ -15,5 +16,5 @@ public interface Reviews {
     Review findById(long id);
     boolean deleteReview(Review review);
     boolean updateReview(Review review);
-    public List<ArrayList> masterReviewList();
+    public HashMap<Long, ArrayList<Review>> masterReviewList();
 }
