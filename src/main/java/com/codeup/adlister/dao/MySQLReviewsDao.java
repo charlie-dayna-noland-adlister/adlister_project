@@ -5,6 +5,7 @@ import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MySQLReviewsDao implements Reviews {
@@ -36,14 +37,27 @@ public class MySQLReviewsDao implements Reviews {
     }
 
     @Override
-    public List<ArrayList> masterReviewList() {
+    public HashMap<Long, ArrayList<Review>> masterReviewList() {
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM reviews;");
             ResultSet rs = stmt.executeQuery();
-            return createReviewsFromResults(rs);
+            HashMap<Long, ArrayList<Review>> mapOfReviewList = new HashMap<>();
+            while(rs.next()) {
+                long adId = rs.getLong("ad_id");
+                if(mapOfReviewList.get(adId) == null) {
+                    ArrayList<Review> pushList = new ArrayList<>();
+                    pushList.add(extractReview(rs));
+                    mapOfReviewList.put(adId, pushList);
+                } else {
+                    ArrayList<Review> getList = mapOfReviewList.get(adId);
+                    getList.add(extractReview(rs));
+                    mapOfReviewList.put(adId, getList);
+                }
+            }
+            return mapOfReviewList;
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all reviews.", e);
+            throw new RuntimeException("Error retrieving all list reviews.", e);
         }
     }
 
