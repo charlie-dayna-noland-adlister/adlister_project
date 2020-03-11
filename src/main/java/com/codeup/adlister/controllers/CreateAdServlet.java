@@ -50,7 +50,7 @@ public class CreateAdServlet extends HttpServlet {
         }
         String imageText = "";
         if(request.getParameter("fileupload") == null) {
-            imageText = "https://edit.co.uk/uploads/2016/12/Image-1-Alternatives-to-stock-photography-Thinkstock.jpg"
+            imageText = "https://edit.co.uk/uploads/2016/12/Image-1-Alternatives-to-stock-photography-Thinkstock.jpg";
         } else {
             imageText = request.getParameter("fileupload");
         }

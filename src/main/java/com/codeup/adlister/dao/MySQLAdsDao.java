@@ -67,8 +67,7 @@ public class MySQLAdsDao implements Ads {
         try {
             String categoryId = "SELECT categories_id FROM ads_categories WHERE ads_id = " + adId;
             PreparedStatement stmt = connection.prepareStatement(categoryId);
-            stmt.executeQuery();
-            ResultSet resSet = stmt.getGeneratedKeys();
+            ResultSet resSet = stmt.executeQuery();
             resSet.next();
             while (resSet.next()){
                 categoryList.add(resSet.getLong(1));
@@ -82,7 +81,7 @@ public class MySQLAdsDao implements Ads {
             String reportsId = "SELECT reported_user_id FROM ads_reported_users WHERE ads_id = " + adId;
             PreparedStatement stmt = connection.prepareStatement(reportsId);
             stmt.executeQuery();
-            ResultSet resSet = stmt.getGeneratedKeys();
+            ResultSet resSet = stmt.executeQuery();
             resSet.next();
             while (resSet.next()){
                 reportsList.add(resSet.getLong(1));
@@ -101,7 +100,7 @@ public class MySQLAdsDao implements Ads {
             rs.getString("image_text"),
             rs.getInt("review_avr"),
             categoryList,
-            rs.getInt("quantityReported"),
+            rs.getInt("quantity_reported"),
             reportsList
         );
     }
