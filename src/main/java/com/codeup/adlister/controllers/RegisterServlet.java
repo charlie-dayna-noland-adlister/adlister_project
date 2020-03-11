@@ -35,7 +35,6 @@ public class RegisterServlet extends HttpServlet {
         String passwordConfirmation = request.getParameter("confirm_password");
         String zipcode = request.getParameter("zipcode");
         // validate input
-        //NOT MINE ^^^^
         String pString = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\\d)[a-zA-Z\\d]{6,}$";
         Pattern pattern = Pattern.compile(pString);
         Matcher matcher = pattern.matcher(password);
@@ -43,7 +42,6 @@ public class RegisterServlet extends HttpServlet {
             //CHANGE TO ERROR HANDLING
             return;
         }
-        //IS MINE BUT TEST ^^^^
         // create and save a new user
         User user = new User(
                 username,
@@ -63,5 +61,6 @@ public class RegisterServlet extends HttpServlet {
         );
         request.getSession().setAttribute("user", user);
         response.sendRedirect("/profile");
+        return;
     }
 }

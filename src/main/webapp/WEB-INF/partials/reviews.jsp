@@ -1,20 +1,3 @@
-<%--REMOVE ONCE DONE TESTING--%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <jsp:include page="/WEB-INF/partials/head.jsp">--%>
-<%--        <jsp:param name="title" value="Your Profile" />--%>
-<%--    </jsp:include>--%>
-
-<%--    <style>--%>
-<%--        <%@include file="/WEB-INF/resources/CSS/custom.css"%>--%>
-<%--    </style>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<jsp:include page="/WEB-INF/partials/navbar.jsp" />--%>
-
-
-
 
 <%--    BLACK STAR: &#9733;--%>
 <%--    WHITE STAR: &#9734;--%>
@@ -113,7 +96,5 @@
 
 <%--THIS MAY NEED TO BE REMOVED --%>
 <jsp:include page="scripts.jsp" />
-<%--</body>--%>
-<%--</html>--%>
 
 

@@ -1,6 +1,124 @@
-.gray {
-    color: slategray;
+@import url('https://fonts.googleapis.com/css?family=Cabin|Open+Sans');
+
+:root {
+    --primary-color: #fff;
 }
-.gold {
+
+* {
+    box-sizing: border-box;
+}
+
+/*NAVBAR STYLE START*/
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.navbar-toggler {
+    border: none;
+}
+/*NAVBAR STYLE END*/
+
+
+/*HOME STYLING START*/
+.home-body {
+    background-color: var(--primary-color);
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.welcome-head {
     color: goldenrod;
+    font-family: 'Cabin', sans-serif;
 }
+
+#login-btn {
+
+}
+
+#register-btn {
+
+}
+
+#login-btn, #register-btn {
+    height: 2em;
+    width: 6em;
+    background: none;
+    border: 1px solid #000;
+    border-radius: 50px;
+}
+
+#login-btn input[type=submit]:focus, #register-btn input[type=submit]:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+#login-btn input[type=submit], #register-btn input[type=submit] {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid #DDDDDD;
+}
+
+.guest-continue {
+    color: black;
+    font-size: 12px;
+}
+
+.guest-continue:hover {
+    cursor: pointer;
+    color: goldenrod;
+    text-decoration: none;
+}
+/*HOME STYLING END*/
+
+/*ADS STYLING START*/
+.card {
+    border: 2px #000 solid;
+    border-radius: 5px;
+}
+
+.learn-btn {
+    font-size: 15px;
+    background: none;
+    border: 1px solid #000;
+    border-radius: 50px;
+    height: 2rem;
+    width: 7rem;
+}
+
+.learn-btn:focus,
+.contact:focus,
+.close:focus,
+.navbar-toggler:focus {
+    outline: 0;
+}
+
+.card-footer {
+    border: none;
+    background-color: #fff;
+}
+
+.ad-image {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.contact {
+    color: #000;
+    font-size: 15px;
+    background: none;
+    border: 1px solid #000;
+    border-radius: 50px;
+    height: 2rem;
+    width: 7rem;
+}
+/*ADS STYLING END*/
