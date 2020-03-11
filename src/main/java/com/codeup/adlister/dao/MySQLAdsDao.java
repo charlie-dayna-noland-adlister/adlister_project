@@ -4,8 +4,6 @@ import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,19 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error connecting to the database!", e);
         }
     }
-
+    @Override
+    public Ad findById(long id) {
+        String query = "SELECT * FROM ads WHERE id = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return extractAd(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding an ad by id. ID was " + id, e);
+        }
+    }
     @Override
     public List<Ad> all() {
         PreparedStatement stmt = null;
@@ -41,7 +51,6 @@ public class MySQLAdsDao implements Ads {
     public Long insert(Ad ad) {
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description, price, date_posted, image_text, review_avr, quantity_reported) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
@@ -54,6 +63,7 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
+            ad.setId(rs.getLong(1));
             addCategories(ad);
             return rs.getLong(1);
         } catch (SQLException e) {
@@ -62,7 +72,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
-        int adId = rs.getInt("id");
+        long adId = rs.getLong("id");
 
         List<Long> categoryList = new ArrayList<>();
         try {
@@ -118,7 +128,7 @@ public class MySQLAdsDao implements Ads {
             String insertStatement = "INSERT INTO ads_categories(ads_id, categories_id) VALUES (?, ?);";
             PreparedStatement catStmt= connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
             catStmt.setLong(1, ad.getId());
-            catStmt.setLong(1, catId);
+            catStmt.setLong(2, catId);
             catStmt.executeUpdate();
         }
     }
@@ -140,7 +150,6 @@ public class MySQLAdsDao implements Ads {
             query = "DELETE FROM ads WHERE id=?;";
             stmt = connection.prepareStatement(query);
             stmt.setLong(1, ad.getId());
-            stmt.execute();
             return stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting an ad.", e);

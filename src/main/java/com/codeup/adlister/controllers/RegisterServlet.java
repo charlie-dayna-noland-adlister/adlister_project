@@ -51,14 +51,15 @@ public class RegisterServlet extends HttpServlet {
                 Integer.parseInt(zipcode)
         );
         long userId = DaoFactory.getUsersDao().insert(user);
-        user = new User(
-                userId,
-                username,
-                email,
-                password,
-                request.getParameter("fileupload"), //change this name(id),
-                Integer.parseInt(zipcode)
-        );
+//        user = new User(
+//                userId,
+//                username,
+//                email,
+//                password,
+//                request.getParameter("fileupload"), //change this name(id),
+//                Integer.parseInt(zipcode)
+//        );
+        user.setId(userId);
         request.getSession().setAttribute("user", user);
         response.sendRedirect("/profile");
         return;

@@ -24,6 +24,7 @@
                 <p>ID: ${ad.id}</p>
                 <p>User ID: ${ad.userId}</p>
                 <img src="${ad.imageText}" alt="ad-image"/>
+                <button class="delete-button" id="delete-${ad.id}">DELETE</button>
             </div>
         </div>
         <div class="row">
@@ -34,6 +35,6 @@
         </div>
     </c:forEach>
 </div>
-
+<jsp:include page="../partials/body-scripts.jsp" />
 </body>
 </html>
