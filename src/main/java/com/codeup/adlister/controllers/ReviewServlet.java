@@ -56,7 +56,7 @@ public class ReviewServlet extends HttpServlet {
             return;
         }
         boolean isDeleted = DaoFactory.getReviewsDao().deleteReview(review);
-        resp.sendRedirect("/ads");
+        resp.sendRedirect("/profile");
         return;
     }
 }
