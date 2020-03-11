@@ -113,12 +113,6 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
-
-
-
-
-
-
     private void addCategories (List<Integer> categories, int ad_id) throws SQLException {
         for (Integer catId:categories){
             String addCat = "INSERT INTO ads_categories (ads_id, categories_id) VALUES (?, ?)";

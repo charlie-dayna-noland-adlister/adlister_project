@@ -32,7 +32,7 @@ public class Ad {
         this.quantityReported = quantityReported;
         this.usersReportedList = usersReported;
     }
-    //Construct Ads from user form submission(used to push to db when image is provided)
+    //Construct Ads from user form submission(used to push to db)
     public Ad(long userId, String title, String description, double price, String datePosted, String imageText, List<Long> categoryIdList) {
         this.userId = userId;
         this.title = title;
@@ -45,19 +45,6 @@ public class Ad {
         this.quantityReported = 0;
         this.usersReportedList = new ArrayList<>();
     }
-//    //Construct Ads from user form submission(used to push to db when image is NOT provided)
-//    public Ad(long userId, String title, String description, double price, List<Long> categoryId) {
-//        this.userId = userId;
-//        this.title = title;
-//        this.description = description;
-//        this.price = price;
-//        this.datePosted = "";
-//        this.imageText = "";
-//        this.reviewAvr = 0;
-//        this.categoryId = categoryId;
-//        this.quantityReported = 0;
-//        this.usersReported = new ArrayList<>();
-//    }
 
     //    // All inclusive constructor
 //    public Ad(int id, long userId, String title, String description, double price, String datePosted, int reviewAvr,
