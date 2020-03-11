@@ -40,7 +40,7 @@ public class CreateReviewServlet extends HttpServlet {
                 Integer.parseInt(request.getParameter("rating")),
                 request.getParameter("imageText"), //image_text
 //                ad.getId() //should this be hardcoded too?
-                1
+                1 //hardcoded
         );
         DaoFactory.getReviewsDao().insert(review);
         response.sendRedirect("/ads");

@@ -28,6 +28,13 @@ VALUES
     (3, 1),
     (3, 3);
 
+INSERT INTO ads_reviews (ads_id, reviews_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 1);
+
+
 INSERT INTO users_followed (user_id, followed_id)
 VALUES
     (1, 2),

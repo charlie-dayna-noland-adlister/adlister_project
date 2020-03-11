@@ -15,6 +15,21 @@
         })
     })
 
+    //delete review
+    let deleteReviewButtonClass = document.querySelectorAll(".delete-review-button");
+    deleteReviewButtonClass.forEach(button => {
+        button.addEventListener("click", function() {
+            let idSplit = this.getAttribute("id").split("-");
+            let reviewId = idSplit[1];
+            fetch('http://localhost:8080/reviews?id=' + reviewId, {
+                method: 'DELETE',
+            })
+                .then(res => {
+                    location.reload(true);
+                })
+        })
+    })
+
     // Set up the picker
     const client = filestack.init(FILESTACK_API_KEY);
     const options = {
