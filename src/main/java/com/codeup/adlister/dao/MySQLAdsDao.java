@@ -112,7 +112,7 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-
+    //WHAT IS THIS BELOW?
     private void addCategories (List<Integer> categories, int ad_id) throws SQLException {
         for (Integer catId:categories){
             String addCat = "INSERT INTO ads_categories (ads_id, categories_id) VALUES (?, ?)";
@@ -120,6 +120,20 @@ public class MySQLAdsDao implements Ads {
             stmt.setInt(1, ad_id);
             stmt.setInt(2, catId);
             stmt.executeUpdate();
+        }
+    }
+    @Override
+    public int deleteAd(Ad ad) {
+        try {
+            String insertQuery = "DELETE FROM ads WHERE id=?;";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1, ad.getId());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
         }
     }
 }

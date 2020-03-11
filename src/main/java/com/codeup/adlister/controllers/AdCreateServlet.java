@@ -11,33 +11,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet("/ads")
-public class AdsIndexServlet extends HttpServlet {
-    @Override
+@WebServlet("/ads/create")
+public class AdCreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        User user = (User)request.getSession().getAttribute("user");
+        if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
+            response.sendRedirect("/login");
+            return;
+        }
+        request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
+            .forward(request, response);
         return;
     }
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
             return;
         }
+//        String date = new SimpleDateFormat("yyyy-mm-dd").format(new Date());
         Date now = new Date();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         String date = formatter.format(now);
+
         String[] catIds = request.getParameter("categoryId").split(" ");
         List<Long> catList = new ArrayList<>();
         for (String catId : catIds){
-            catList.add(Long.parseLong(catId));
+           catList.add(Long.parseLong(catId));
         }
         String imageText = "";
         if(request.getParameter("fileupload") == null) {
@@ -46,33 +53,15 @@ public class AdsIndexServlet extends HttpServlet {
             imageText = request.getParameter("fileupload");
         }
         Ad ad = new Ad(
-                user.getId(),
-                request.getParameter("title"),
-                request.getParameter("description"),
-                Double.parseDouble(request.getParameter("price")),
-                date,
-                imageText,
-                catList
+            user.getId(),
+            request.getParameter("title"),
+            request.getParameter("description"),
+            Double.parseDouble(request.getParameter("price")),
+            date,
+            imageText,
+            catList
         );
         DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
-        return;
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        super.doDelete(req, resp);
-        User user = (User)request.getSession().getAttribute("user");
-        Ad ad = (Ad)request.getSession().getAttribute("ad");
-        if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
-            response.sendRedirect("/login");
-            return;
-        }
-        if (ad == null || user.getId() != ad.getUserId()) {
-            response.sendRedirect("/ads");
-            return;
-        }
-        long idOfDeletedAdd = DaoFactory.getAdsDao().deleteAd(ad);
         response.sendRedirect("/ads");
         return;
     }
