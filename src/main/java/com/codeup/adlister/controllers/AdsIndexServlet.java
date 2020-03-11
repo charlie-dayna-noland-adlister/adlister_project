@@ -77,8 +77,19 @@ public class AdsIndexServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        super.doPut(req, resp);
-
+        User user = (User)request.getSession().getAttribute("user");
+        if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
+            response.sendRedirect("/login");
+            return;
+        }
+        Ad ad = (Ad)request.getSession().getAttribute("ad");
+        if (ad == null || user.getId() != ad.getUserId()) {
+            response.sendRedirect("/ads");
+            return;
+        }
+        boolean isDeleted = DaoFactory.getAdsDao().updateAd(ad);
+        return;
     }
 }
