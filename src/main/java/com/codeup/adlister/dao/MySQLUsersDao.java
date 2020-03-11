@@ -65,7 +65,7 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-    public User extractUser(ResultSet rs) throws SQLException {
+    private User extractUser(ResultSet rs) throws SQLException {
         if (!rs.next()) {
             return null;
         }
