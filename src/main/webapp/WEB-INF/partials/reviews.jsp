@@ -1,16 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Your Profile" />
-    </jsp:include>
+<%--REMOVE ONCE DONE TESTING--%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%--<html>--%>
+<%--<head>--%>
+<%--    <jsp:include page="/WEB-INF/partials/head.jsp">--%>
+<%--        <jsp:param name="title" value="Your Profile" />--%>
+<%--    </jsp:include>--%>
 
-    <style>
-        <%@include file="/WEB-INF/resources/CSS/custom.css"%>
-    </style>
-</head>
-<body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+<%--    <style>--%>
+<%--        <%@include file="/WEB-INF/resources/CSS/custom.css"%>--%>
+<%--    </style>--%>
+<%--</head>--%>
+<%--<body>--%>
+<%--<jsp:include page="/WEB-INF/partials/navbar.jsp" />--%>
+
+
+
 
 <%--    BLACK STAR: &#9733;--%>
 <%--    WHITE STAR: &#9734;--%>
@@ -18,19 +22,21 @@
 <!-- Button trigger modal -->
 <div class="container">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Review Ad
+    Review This Ad
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Rate this Ad</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
                 <form action="/ads/review" method="post">
                     <div class="form-group">
@@ -96,21 +102,18 @@
                     <input type="submit" class="btn btn-block btn-primary">
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<%--                <button type="button" class="btn btn-primary">Save changes</button>--%>
             </div>
         </div>
     </div>
 </div>
 </div>
 
-<%--    <div class="container">--%>
-<%--        <h1>Review ${sessionScope.ad.title} Below:</h1>--%>
-<%--        --%>
-<%--    </div>--%>
+<%--THIS MAY NEED TO BE REMOVED --%>
 <jsp:include page="scripts.jsp" />
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>
 
 
