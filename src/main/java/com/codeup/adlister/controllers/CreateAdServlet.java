@@ -41,20 +41,27 @@ public class CreateAdServlet extends HttpServlet {
         Date now = new Date();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-        String mysqlDateString = formatter.format(now);
+        String date = formatter.format(now);
 
         String[] catIds = request.getParameter("categoryId").split(" ");
-        List<Integer> catList = new ArrayList<>();
+        List<Long> catList = new ArrayList<>();
         for (String catId : catIds){
-           catList.add(Integer.parseInt(catId));
+           catList.add(Long.parseLong(catId));
         }
-
+        String imageText = "";
+        if(request.getParameter("fileupload") == null) {
+            imageText = "https://edit.co.uk/uploads/2016/12/Image-1-Alternatives-to-stock-photography-Thinkstock.jpg"
+        } else {
+            imageText = request.getParameter("fileupload");
+        }
+//        long userId, String title, String description, double price, String datePosted, String imageText, List<Long> categoryIdList
         Ad ad = new Ad(
             user.getId(),
             request.getParameter("title"),
             request.getParameter("description"),
             Double.parseDouble(request.getParameter("price")),
-            mysqlDateString,
+            date,
+            imageText,
             catList
         );
         DaoFactory.getAdsDao().insert(ad);
