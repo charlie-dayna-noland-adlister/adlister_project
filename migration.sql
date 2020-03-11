@@ -24,26 +24,28 @@ USE `adlister_database` ;
 -- -----------------------------------------------------
 -- Table `adlister_database`.`users`
 -- -----------------------------------------------------
-# DROP TABLE IF EXISTS `adlister_database`.`users` ;
-#
-# CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
-#   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-#   `username` VARCHAR(45) NOT NULL,
-#   `email` VARCHAR(100) NOT NULL,
-#   `password` VARCHAR(255) NOT NULL,
-#   `image_text` LONGTEXT NULL,
-#   `user_avr` TINYINT(6) UNSIGNED NOT NULL,
-#   `times_reported` INT UNSIGNED NOT NULL,
-#   `num_ads_reported` INT UNSIGNED NOT NULL,
-#   `num_reviews` INT UNSIGNED NOT NULL,
-#   `zipcode` INT UNSIGNED NOT NULL,
-#   `is_admin` TINYINT(1) NOT NULL,
-#   PRIMARY KEY (`id`),
-#   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-#   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-#   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
-#
-# ENGINE = InnoDB;
+
+-- DROP TABLE IF EXISTS `adlister_database`.`users` ;
+--
+-- CREATE TABLE IF NOT EXISTS `adlister_database`.`users` (
+--  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+--  `username` VARCHAR(45) NOT NULL,
+--  `email` VARCHAR(100) NOT NULL,
+--  `password` VARCHAR(255) NOT NULL,
+--  `image_text` LONGTEXT NULL,
+--  `user_avr` TINYINT(6) UNSIGNED NOT NULL,
+--  `times_reported` INT UNSIGNED NOT NULL,
+--  `num_ads_reported` INT UNSIGNED NOT NULL,
+--  `num_reviews` INT UNSIGNED NOT NULL,
+--  `zipcode` INT UNSIGNED NOT NULL,
+--  `is_admin` TINYINT(1) NOT NULL,
+--  PRIMARY KEY (`id`),
+--  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+--  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+--  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+--
+-- ENGINE = InnoDB;
+
 -- -----------------------------------------------------
 -- Table `adlister_database`.`ads`
 -- -----------------------------------------------------
@@ -117,6 +119,21 @@ CREATE TABLE IF NOT EXISTS `adlister_database`.`ads_categories` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)
   )
 ENGINE = InnoDB;
+
+
+DROP TABLE IF EXISTS `adlister_database`.`ads_reviews` ;
+
+CREATE TABLE IF NOT EXISTS `adlister_database`.`ads_reviews` (
+   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   ads_id INT UNSIGNED,
+   reviews_id INT UNSIGNED,
+   PRIMARY KEY (`id`),
+   FOREIGN KEY (ads_id) REFERENCES ads (id),
+   FOREIGN KEY (reviews_id) REFERENCES reviews (id),
+   UNIQUE INDEX `id_UNIQUE` (`id` ASC)
+)
+    ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS `adlister_database`.`users_followed` ;
 

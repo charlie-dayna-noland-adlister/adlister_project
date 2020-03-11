@@ -1,6 +1,35 @@
 <script>src="resources/js/keys.js"</script>
 <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script>
+    let deleteButtonClass = document.querySelectorAll(".delete-button");
+    deleteButtonClass.forEach(button => {
+        button.addEventListener("click", function() {
+            let idSplit = this.getAttribute("id").split("-");
+            let adId = idSplit[1];
+            fetch('http://localhost:8080/ads?id=' + adId, {
+                method: 'DELETE',
+            })
+                .then(res => {
+                    location.reload(true);
+                })
+        })
+    })
+
+    //delete review
+    let deleteReviewButtonClass = document.querySelectorAll(".delete-review-button");
+    deleteReviewButtonClass.forEach(button => {
+        button.addEventListener("click", function() {
+            let idSplit = this.getAttribute("id").split("-");
+            let reviewId = idSplit[1];
+            fetch('http://localhost:8080/reviews?id=' + reviewId, {
+                method: 'DELETE',
+            })
+                .then(res => {
+                    location.reload(true);
+                })
+        })
+    })
+
     // Set up the picker
     const client = filestack.init(FILESTACK_API_KEY);
     const options = {
@@ -26,25 +55,11 @@
         picker.open();
     });
 
-    // form.addEventListener('submit', function (e) {
-    //     e.preventDefault();
-    //     alert('Submitting: ' + fileInput.value);
-    // });
-
-    // Helper to overwrite the field input value
 
     function updateForm (result) {
         const fileData = result.filesUploaded[0];
         fileInput.value = fileData.url; //this is the good part
         console.log(fileData.url);
         console.log(fileInput.value);
-        // Some ugly DOM code to show some data.
-        // const name = document.createTextNode('Selected: ' + fileData.filename);
-        // const url = document.createElement('a');
-        // url.href = fileData.url;
-        // url.appendChild(document.createTextNode(fileData.url));
-        // nameBox.appendChild(name);
-        // urlBox.appendChild(document.createTextNode('Uploaded to: '));
-        // urlBox.appendChild(url);
     };
 </script>

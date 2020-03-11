@@ -8,6 +8,6 @@ import java.sql.SQLException;
 
 public interface Users {
     User findByUsername(String username);
+    User findById(long id);
     Long insert(User user);
-    User extractUser(ResultSet rs) throws SQLException;
 }

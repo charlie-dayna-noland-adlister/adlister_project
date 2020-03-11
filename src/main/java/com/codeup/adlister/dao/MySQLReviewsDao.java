@@ -27,7 +27,19 @@ public class MySQLReviewsDao implements Reviews {
     public List<Review> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM reviews");
+            stmt = connection.prepareStatement("SELECT * FROM reviews;");
+            ResultSet rs = stmt.executeQuery();
+            return createReviewsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all reviews.", e);
+        }
+    }
+
+    @Override
+    public List<ArrayList> masterReviewList() {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM reviews;");
             ResultSet rs = stmt.executeQuery();
             return createReviewsFromResults(rs);
         } catch (SQLException e) {
@@ -71,5 +83,39 @@ public class MySQLReviewsDao implements Reviews {
             reviews.add(extractReview(rs));
         }
         return reviews;
+    }
+
+    @Override
+    public Review findById(long id) {
+        String query = "SELECT * FROM reviews WHERE id = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return extractReview(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a review by id. ID was " + id, e);
+        }
+    }
+
+    @Override
+    public boolean deleteReview(Review review) {
+        try {
+            String query = "DELETE FROM ads_reviews WHERE reviews_id=?;";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, review.getId());
+            stmt.execute();
+            query = "DELETE FROM reviews WHERE id=?;";
+            stmt = connection.prepareStatement(query);
+            stmt.setLong(1, review.getId());
+            return stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting an ad.", e);
+        }    }
+
+    @Override
+    public boolean updateReview(Review review) {
+        return false;
     }
 }
