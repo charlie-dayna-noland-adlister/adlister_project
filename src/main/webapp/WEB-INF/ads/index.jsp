@@ -85,32 +85,9 @@
             </c:forEach>
         </div>
 </div>
-<%--<div class="container">--%>
-<%--    <h1>Here Are all the ads!</h1>--%>
-<%--    --%>
-<%--    <c:forEach var="ad" items="${ads}">--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-md-6">--%>
-<%--                <h2>Title: ${ad.title}</h2>--%>
-<%--                <h6>Review Average: ${ad.reviewAvr}</h6>--%>
-<%--                <p>Description: ${ad.description}</p>--%>
-<%--                <h6>Price: ${ad.price}</h6>--%>
-<%--                <small>Date Posted: ${ad.datePosted}</small>--%>
-<%--&lt;%&ndash;                <p>Categories: ${ad.categoryIdList}</p>&ndash;%&gt;--%>
-<%--                <p>ID: ${ad.id}</p>--%>
-<%--                <p>User ID: ${ad.userId}</p>--%>
-<%--                <img src="${ad.imageText}" alt="ad-image"/>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-md-6">--%>
-<%--                <p>Quantity Reported: ${ad.quantityReported}</p>--%>
-<%--&lt;%&ndash;                <p>Users Who Reported: ${ad.usersReportedList}</p>&ndash;%&gt;--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </c:forEach>--%>
-<%--</div>--%>
 
 <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
+<jsp:include page="/WEB-INF/partials/body-scripts.jsp"/>
+
 </body>
 </html>

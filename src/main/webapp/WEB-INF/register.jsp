@@ -69,5 +69,7 @@
 
 
     <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
+<jsp:include page="/WEB-INF/partials/body-scripts.jsp"/>
+
 </body>
 </html>
