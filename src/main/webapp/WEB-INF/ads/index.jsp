@@ -32,11 +32,11 @@
                                 <small>Price: $${ad.price}</small>
                         </div>
                         <div class="card-footer text-center">
-                            <small class="text-muted">Rating</small>
+                            <small class="text-light">Rating</small>
                         </div>
 
                         <!-- Button trigger modal -->
-                        <div class="text-center">
+                        <div class="text-center mb-2">
                         <button type="button" class="learn-btn py-0 mb-2" data-toggle="modal"
                                 data-target="#exampleModalLong">Learn more</button>
                         </div>
@@ -55,12 +55,10 @@
                                         <div class="row">
                                             <div class="col br-1 pr-0">
                                                 <div class="modal-image">
-                                                    <img
-                                                            src="https://previews.123rf.com/images/zurijeta/zurijeta1701/zurijeta170101294/70642941-kid-working-on-computer.jpg" class="ad-image" alt="ad-image">
+                                                    <img src="https://previews.123rf.com/images/zurijeta/zurijeta1701/zurijeta170101294/70642941-kid-working-on-computer.jpg" class="ad-image" alt="ad-image">
                                                 </div>
                                             </div>
-                                            <div
-                                                    class="col pl-0 d-flex flex-column justify-content-center align-items-center">
+                                            <div class="col pl-0 d-flex flex-column justify-content-center align-items-center">
                                                 <div class="modal-desc pb-2 text-center d-flex flex-column justify-content-center align-items-center">
                                                     <p class="card-text m-1">${ad.description}</p>
                                                     <small class="text-center">Price: $${ad.price}</small>

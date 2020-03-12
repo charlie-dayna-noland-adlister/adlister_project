@@ -11,8 +11,11 @@
 </head>
 <body class="home-body">
     <div class="container d-flex flex-column justify-content-center align-items-center">
-        <h1 class="welcome-head">Welcome to WhatTheJunk!</h1>
-        <small></small>
+        <div class="text-center pb-4">
+        <h1 class="welcome-head display-3">Welcome to <span>WhatTheJunk!</span> </h1>
+            <h5 class="text-light"><em>Where your junk is someone's luck</em></h5>
+        </div>
+
         <div class="d-inline-flex">
             <form action="/login" method="GET" class="pr-1 mb-1">
                 <input type="submit" value="Login" id="login-btn">

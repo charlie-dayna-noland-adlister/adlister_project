@@ -1,20 +1,46 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin|Open+Sans');
 
 :root {
-    --primary-color: #fff;
+    --primary-color: #252526;
+    --primary-light-color: #353637;
+    --blue-color: #70C1DF;
+    --dull-blue-color: #547C83;
+    --main-font-color: #fff;
+
 }
 
 * {
     box-sizing: border-box;
 }
 
+body {
+    background-color: var(--primary-color);
+}
+
 /*NAVBAR STYLE START*/
 .navbar {
+    fill: var(--primary-color);
+    color: var(--main-font-color);
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.navbar-brand {
+    font-family: 'Cabin', sans-serif;
+    color: var(--main-font-color);
+}
+.navbar-brand:hover {
+    color: var(--blue-color);
+}
+
 .navbar-toggler {
     border: none;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--blue-color) !important;
+}
+
+nav .navbar-toggler .navbar-toggler-icon {
+    color: var(--blue-color) !important;
 }
 /*NAVBAR STYLE END*/
 
@@ -22,7 +48,6 @@
 /*HOME STYLING START*/
 .home-body {
     background-color: var(--primary-color);
-    font-family: 'Open Sans', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,68 +55,94 @@
     margin: 0;
 }
 
+.home-body .container {
+    padding: 3rem;
+    border-radius: 10px;
+    border-color: white;
+    background-color: var(--primary-light-color);
+    -webkit-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
+    -moz-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
+    box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
+}
+
 .welcome-head {
-    color: goldenrod;
+    color: var(--main-font-color);
     font-family: 'Cabin', sans-serif;
 }
 
-#login-btn {
-
-}
-
+#login-btn,
 #register-btn {
-
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 #login-btn, #register-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    color: var(--main-font-color);
     height: 2em;
     width: 6em;
-    background: none;
-    border: 1px solid #000;
+    background-color: #738bdc;
+    background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
+    border: none;
     border-radius: 50px;
 }
 
-#login-btn input[type=submit]:focus, #register-btn input[type=submit]:focus {
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-    border: 1px solid rgba(81, 203, 238, 1);
+#login-btn:focus, #register-btn:focus{
+    outline: 0;
 }
 
-#login-btn input[type=submit], #register-btn input[type=submit] {
-    -webkit-transition: all 0.30s ease-in-out;
-    -moz-transition: all 0.30s ease-in-out;
-    -ms-transition: all 0.30s ease-in-out;
-    -o-transition: all 0.30s ease-in-out;
-    outline: none;
-    padding: 3px 0px 3px 3px;
-    margin: 5px 1px 3px 0px;
-    border: 1px solid #DDDDDD;
+
+#login-btn:hover, #register-btn:hover{
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .guest-continue {
-    color: black;
+    padding-top: 10px;
+    color: #fff;
     font-size: 12px;
 }
 
 .guest-continue:hover {
     cursor: pointer;
-    color: goldenrod;
+    color: rgb(112, 193, 223);
     text-decoration: none;
 }
 /*HOME STYLING END*/
 
-/*ADS STYLING START*/
+/*ADS CARD STYLING START*/
 .card {
-    border: 2px #000 solid;
-    border-radius: 5px;
+    -webkit-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.20);
+    -moz-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.20);
+    box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.20);
+    border-radius: 10px;
+}
+
+img .card-img-top {
+    border: 0;
+}
+
+.card-title {
+    font-family: 'Cabin', sans-serif;
 }
 
 .learn-btn {
     font-size: 15px;
+    color: var(--main-font-color);
     background: none;
-    border: 1px solid #000;
+    border: 1px var(--blue-color) solid;
     border-radius: 50px;
     height: 2rem;
     width: 7rem;
+}
+
+.learn-btn:hover {
+    transform: scale(1.01);
+    border: 0;
+    background-color: #738bdc;
+    background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
 }
 
 .learn-btn:focus,
@@ -101,12 +152,16 @@
     outline: 0;
 }
 
+.card,
+.card-body,
 .card-footer {
     border: none;
-    background-color: #fff;
+    color: var(--main-font-color);
+    background-color: var(--primary-light-color);
 }
 
 .ad-image {
+    border: none;
     display: block;
     max-height: 100%;
     max-width: 100%;
@@ -116,7 +171,7 @@
     color: #000;
     font-size: 15px;
     background: none;
-    border: 1px solid #000;
+    border: 1px var(--blue-color) solid;
     border-radius: 50px;
     height: 2rem;
     width: 7rem;
