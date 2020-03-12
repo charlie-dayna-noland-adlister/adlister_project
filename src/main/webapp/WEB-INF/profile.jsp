@@ -14,12 +14,9 @@
 
     <div class="container d-flex justify-content-left align-items-center">
         <img src="${sessionScope.user.profileImageText}" alt="${sessionScope.user.username} PROFILE IMAGE" class="img-thumbnail mr-5 mt-5 h-200">
-<%--        <img src="https://as1.ftcdn.net/jpg/02/26/27/00/500_F_226270069_bRrObQO6Ar8pb9aiTZ5899CrP3MzPEbq.jpg" alt="${sessionScope.user.username} PROFILE IMAGE" class="img-thumbnail mr-5 mt-5">--%>
         <h1 class="text-light">Welcome, ${sessionScope.user.username}!</h1>
         <br>
     </div>
-
-    
     <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
 </body>
 </html>
