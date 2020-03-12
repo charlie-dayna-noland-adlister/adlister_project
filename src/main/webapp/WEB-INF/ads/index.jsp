@@ -38,7 +38,7 @@
                         <!-- Button trigger modal -->
                         <div class="text-center m-2">
                         <button type="button" class="learn-btn py-0 mb-2" data-toggle="modal"
-                                data-target="#modal-${ad.id}">Learn more</button>
+                            data-target="#modal-${ad.id}">Learn more</button>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="modal-${ad.id}" tabindex="-1" role="dialog"
