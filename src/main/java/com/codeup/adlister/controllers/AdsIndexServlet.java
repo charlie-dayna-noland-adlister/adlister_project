@@ -20,7 +20,7 @@ public class AdsIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ads/test-index.jsp").forward(request, response);
         return;
     }
     @Override
@@ -79,7 +79,6 @@ public class AdsIndexServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        super.doPut(req, resp);
         User user = (User)request.getSession().getAttribute("user");
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
