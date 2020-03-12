@@ -18,6 +18,7 @@ body {
 
 h1, h2, h3, h4, h5, h6{
     font-family: 'Cabin', sans-serif;
+    color: var(--main-font-color);
 }
 
 
@@ -152,7 +153,8 @@ img .card-img-top {
     font-family: 'Cabin', sans-serif;
 }
 
-.learn-btn {
+.update-button,
+.delete-button {
     font-size: 15px;
     color: var(--main-font-color);
     background: none;
@@ -162,14 +164,16 @@ img .card-img-top {
     width: 7rem;
 }
 
-.learn-btn:hover {
+.update-button:hover,
+.delete-button:hover {
     transform: scale(1.01);
     border: 0;
     background-color: #738bdc;
     background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
 }
 
-.learn-btn:focus,
+.update-button:focus,
+.delete-button:focus,
 .contact:focus,
 .close:focus,
 .navbar-toggler:focus {
@@ -243,19 +247,41 @@ i.fa-sign-in-alt{
     background-color: var(--primary-light-color);
 }
 
-#username, #password {
+#username, #password, #confirm_password, #email, #zipcode, #title, #price, .custom-dropdown {
     background-color: var(--primary-color);
     color: var(--main-font-color);
     border: 1px var(--blue-color) solid ;
     border-radius: 50px;
 }
 
-input[type=text]:focus, input[type=password]:focus{
+#description {
+    background-color: var(--primary-color);
+    color: var(--main-font-color);
+    border: 1px var(--blue-color) solid ;
+    border-radius: 10px;
+    height: 15rem;
+    width: 21rem;
+}
+
+.dropdown-menu {
+    background-color: var(--primary-color);
+    color: var(--main-font-color);
+    border: 1px var(--blue-color) solid ;
+    border-radius: 10px;
+    width: 10rem;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea[type=text]:focus{
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     border: 1px solid rgba(81, 203, 238, 1);
 }
 
-input[type=text], input[type=password] {
+/*input[type=text]:visited, input[type=password]:visited, input[type=email]:visited{*/
+/*    background-color: var(--primary-color);*/
+/*    color: var(--main-font-color);*/
+/*}*/
+
+input[type=text], input[type=password], input[type=email], textarea[type=text] {
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -286,7 +312,18 @@ input[type=text], input[type=password] {
     color: var(--main-font-color);
 }
 
-.submit:hover {
+.photo-upload{
+    cursor: pointer;
+    height: 2em;
+    width: 12em;
+    background-color: var(--primary-color);
+    border-radius: 50px;
+    border: 1px solid var(--blue-color);
+    color: var(--main-font-color);
+}
+
+
+.submit:hover, .photo-upload:hover {
     transform: scale(1.02);
     border: 0;
     background-color: #738bdc;
@@ -294,7 +331,13 @@ input[type=text], input[type=password] {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.container .login-container{
+.submit:focus{
+    outline: 0;
+}
+
+.container .login-container,
+.container .register-container,
+.container .create-container{
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
@@ -303,7 +346,9 @@ input[type=text], input[type=password] {
     margin: 0;
 }
 
-.login-container {
+.login-container,
+.register-container,
+.create-container {
     padding: 3rem;
     border-radius: 10px;
     border-color: white;
@@ -313,3 +358,35 @@ input[type=text], input[type=password] {
     box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
 }
 /*LOGIN STYLING END*/
+
+/*CREATE STYLING START*/
+.dropdown-container ul li ul{
+    max-height:200px;/* you can change as you need it */
+    overflow:auto;/* to get scroll */
+}
+
+ul li {
+    list-style: none;
+}
+
+ul li a:hover {
+    text-decoration: none;
+}
+
+b .caret {
+    transform: rotate(180deg);
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: var(--main-font-color) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px var(--primary-color) inset !important;
+}
+
+/*CREATE STYLING END*/

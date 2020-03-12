@@ -31,14 +31,21 @@
                                 <p class="card-text">${ad.description}</p>
                                 <small>Price: $${ad.price}</small>
                         </div>
-                        <div class="card-footer text-center">
-                            <small class="text-light">Rating</small>
-                        </div>
+<%--                        <div class="card-footer text-center">--%>
+<%--                            <small class="text-light">Rating</small>--%>
+<%--                        </div>--%>
 
                         <!-- Button trigger modal -->
                         <div class="text-center m-2">
-                        <button type="button" class="learn-btn py-0 mb-2" data-toggle="modal"
-                                data-target="#modal-${ad.id}">Learn more</button>
+<%--                        <button type="button" class="learn-btn py-0 mb-2" data-toggle="modal"--%>
+<%--                            data-target="#modal-${ad.id}">Edit</button>--%>
+                            <button type="button" class="update-button py-0 pr-2 mb-2" id="update-${ad.id}">
+                                Edit Ad
+                            </button>
+                            <button type="button" class="delete-button py-0 pl-2 mb-2" id="delete-${ad.id}">
+                                Delete Ad
+                            </button>
+
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="modal-${ad.id}" tabindex="-1" role="dialog"
@@ -54,7 +61,7 @@
                                     <div class="modal-body pt-0">
                                         <div class="row">
                                             <div class="col br-1 px-0 modal-image">
-                                                    <img src="https://previews.123rf.com/images/zurijeta/zurijeta1701/zurijeta170101294/70642941-kid-working-on-computer.jpg" class="ad-image" alt="ad-image">
+                                                    <img src="${ad.imageText}" class="ad-image" alt="ad-image">
                                             </div>
                                             <div class="col modal-desc-container d-flex flex-column justify-content-center align-items-center">
                                                 <div class="modal-desc text-center">
@@ -78,32 +85,9 @@
             </c:forEach>
         </div>
 </div>
-<%--<div class="container">--%>
-<%--    <h1>Here Are all the ads!</h1>--%>
-<%--    --%>
-<%--    <c:forEach var="ad" items="${ads}">--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-md-6">--%>
-<%--                <h2>Title: ${ad.title}</h2>--%>
-<%--                <h6>Review Average: ${ad.reviewAvr}</h6>--%>
-<%--                <p>Description: ${ad.description}</p>--%>
-<%--                <h6>Price: ${ad.price}</h6>--%>
-<%--                <small>Date Posted: ${ad.datePosted}</small>--%>
-<%--&lt;%&ndash;                <p>Categories: ${ad.categoryIdList}</p>&ndash;%&gt;--%>
-<%--                <p>ID: ${ad.id}</p>--%>
-<%--                <p>User ID: ${ad.userId}</p>--%>
-<%--                <img src="${ad.imageText}" alt="ad-image"/>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-md-6">--%>
-<%--                <p>Quantity Reported: ${ad.quantityReported}</p>--%>
-<%--&lt;%&ndash;                <p>Users Who Reported: ${ad.usersReportedList}</p>&ndash;%&gt;--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </c:forEach>--%>
-<%--</div>--%>
 
 <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
+<jsp:include page="/WEB-INF/partials/body-scripts.jsp"/>
+
 </body>
 </html>
