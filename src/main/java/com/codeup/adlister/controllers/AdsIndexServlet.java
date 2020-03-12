@@ -20,7 +20,7 @@ public class AdsIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ads/test-index.jsp").forward(request, response);
         return;
     }
     @Override
@@ -80,16 +80,29 @@ public class AdsIndexServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User)request.getSession().getAttribute("user");
+        long adId = Long.parseLong(request.getParameter("id"));
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
             return;
         }
-        Ad ad = (Ad)request.getSession().getAttribute("ad");
+        Ad ad = DaoFactory.getAdsDao().findById(adId);
         if (ad == null || user.getId() != ad.getUserId()) {
             response.sendRedirect("/ads");
             return;
         }
+        String[] catIds = request.getParameter("categoryId").split(" ");
+        List<Long> catIdList = new ArrayList<>();
+        for (String catId : catIds){
+            catIdList.add(Long.parseLong(catId));
+        }
+
+        ad.setTitle(request.getParameter("title"));
+        ad.setDescription(request.getParameter("description"));
+        ad.setPrice(Double.parseDouble(request.getParameter("price")));
+        ad.setCategoryIdList(catIdList);
+
         DaoFactory.getAdsDao().updateAd(ad);
+        response.sendRedirect("/ads");
         return;
     }
 }

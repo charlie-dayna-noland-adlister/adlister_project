@@ -214,13 +214,14 @@ public class MySQLAdsDao implements Ads {
     @Override
     public boolean updateAd(Ad ad) {
         try {
-            String query = "UPDATE ads SET title = ?, description = ?, price = ?, image_text = ?, WHERE id = ?;";
-            PreparedStatement stmt = connection.prepareStatement(query);
+            String query = "UPDATE ads SET title = ?, description = ?, price = ? WHERE id = ?;";
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, ad.getTitle());
             stmt.setString(2, ad.getDescription());
             stmt.setDouble(3, ad.getPrice());
-            stmt.setString(4, ad.getImageText());
-            stmt.execute();
+            stmt.setLong(4, ad.getId());
+            stmt.executeUpdate();
+
             //delete then update
             query = "DELETE FROM ads_categories WHERE ads_id=?;";
             stmt = connection.prepareStatement(query);
