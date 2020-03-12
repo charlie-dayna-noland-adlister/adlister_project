@@ -6,7 +6,6 @@
     --blue-color: #70C1DF;
     --dull-blue-color: #547C83;
     --main-font-color: #fff;
-
 }
 
 * {
@@ -16,6 +15,11 @@
 body {
     background-color: var(--primary-color);
 }
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Cabin', sans-serif;
+}
+
 
 /*NAVBAR STYLE START*/
 .navbar {
@@ -35,12 +39,31 @@ body {
 
 .navbar-toggler {
     border: none;
-    font-family: 'Open Sans', sans-serif;
+    color: var(--main-font-color) !important;
+}
+
+.navbar-toggler:hover {
+    border: none;
     color: var(--blue-color) !important;
 }
 
-nav .navbar-toggler .navbar-toggler-icon {
-    color: var(--blue-color) !important;
+.navbar-toggler-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ul li.nav-item {
+    padding-right: 15px;
+}
+
+ul li a.nav-link {
+     color: var(--main-font-color);
+}
+
+ul li a.nav-link:hover {
+    color: var(--blue-color);
 }
 /*NAVBAR STYLE END*/
 
@@ -112,6 +135,7 @@ nav .navbar-toggler .navbar-toggler-icon {
 }
 /*HOME STYLING END*/
 
+
 /*ADS CARD STYLING START*/
 .card {
     -webkit-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.20);
@@ -166,6 +190,25 @@ img .card-img-top {
     max-height: 100%;
     max-width: 100%;
 }
+/*ADS STYLING END*/
+
+
+/*MODAL STYLING START*/
+.modal-body, .modal-header, .modal-desc-container {
+    background-color: var(--primary-light-color);
+}
+
+.modal-header button.close {
+     color: var(--main-font-color);
+}
+
+.modal-header button.close:hover {
+    color: var(--blue-color);
+}
+
+.modal-desc-container, .modal-image {
+    overflow: hidden;
+}
 
 .contact {
     color: #000;
@@ -176,4 +219,97 @@ img .card-img-top {
     height: 2rem;
     width: 7rem;
 }
-/*ADS STYLING END*/
+
+.contact:hover {
+    transform: scale(1.01);
+    border: 0;
+    background-color: #738bdc;
+    background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
+}
+/*MODAL STYLING END*/
+
+/*LOGIN STYLING START*/
+i.fa-user{
+    color: var(--main-font-color);
+}
+
+i.fa-sign-in-alt{
+    color: var(--main-font-color);
+}
+
+.login-container{
+    border-radius: 5px;
+    padding: 5px;
+    background-color: var(--primary-light-color);
+}
+
+#username, #password {
+    background-color: var(--primary-color);
+    color: var(--main-font-color);
+    border: 1px var(--blue-color) solid ;
+    border-radius: 50px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+input[type=text], input[type=password] {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0;
+    border: 1px solid #DDDDDD;
+}
+
+::placeholder{
+    color: var(--main-font-color);
+}
+::-webkit-input-placeholder { /* Edge */
+    color: var(--main-font-color);
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--main-font-color);
+}
+
+.submit {
+    cursor: pointer;
+    height: 2em;
+    width: 6em;
+    background-color: var(--primary-color);
+    border-radius: 50px;
+    border: 1px solid var(--blue-color);
+    color: var(--main-font-color);
+}
+
+.submit:hover {
+    transform: scale(1.02);
+    border: 0;
+    background-color: #738bdc;
+    background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.container .login-container{
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    margin: 0;
+}
+
+.login-container {
+    padding: 3rem;
+    border-radius: 10px;
+    border-color: white;
+    background-color: var(--primary-color);
+    -webkit-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
+    -moz-box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
+    box-shadow: 18px 18px 21px -2px rgba(0,0,0,0.41);
+}
+/*LOGIN STYLING END*/

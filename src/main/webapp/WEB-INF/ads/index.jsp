@@ -20,7 +20,7 @@
 </c:choose>
 
 <div class="container">
-    <h1>All ads!</h1>
+    <h1 class="text-light">All ads!</h1>
         <div class="row row-cols-1 row-cols-md-3">
             <c:forEach var="ad" items="${ads}">
                 <div class="col mb-4">
@@ -36,45 +36,42 @@
                         </div>
 
                         <!-- Button trigger modal -->
-                        <div class="text-center mb-2">
+                        <div class="text-center m-2">
                         <button type="button" class="learn-btn py-0 mb-2" data-toggle="modal"
-                                data-target="#exampleModalLong">Learn more</button>
+                                data-target="#modal-${ad.id}">Learn more</button>
                         </div>
                         <!-- Modal -->
-<%--                <c:forEach var="ad" items="${ads}">--%>
-                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <div class="modal fade" id="modal-${ad.id}" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header text-center">
+                                    <div class="modal-header border-0 py-1">
                                         <h5 class="modal-title" id="exampleModalLongTitle">${ad.title}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <span>&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body p-0">
+                                    <div class="modal-body pt-0">
                                         <div class="row">
-                                            <div class="col br-1 pr-0">
-                                                <div class="modal-image">
+                                            <div class="col br-1 px-0 modal-image">
                                                     <img src="https://previews.123rf.com/images/zurijeta/zurijeta1701/zurijeta170101294/70642941-kid-working-on-computer.jpg" class="ad-image" alt="ad-image">
-                                                </div>
                                             </div>
-                                            <div class="col pl-0 d-flex flex-column justify-content-center align-items-center">
-                                                <div class="modal-desc pb-2 text-center d-flex flex-column justify-content-center align-items-center">
+                                            <div class="col modal-desc-container d-flex flex-column justify-content-center align-items-center">
+                                                <div class="modal-desc text-center">
                                                     <p class="card-text m-1">${ad.description}</p>
                                                     <small class="text-center">Price: $${ad.price}</small>
                                                 </div>
-                                                <div class="pb-3">
-                                                    <input type="button" class="contact" value="Contact user">
+                                                <div class="pb-3 pt-5">
+                                                    <input type="button" class="contact text-light"
+                                                           value="Contact user">
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-<%--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
                                 </div>
                             </div>
                         </div>
-<%--                </c:forEach>--%>
 
                     </div>
                 </div>
