@@ -34,11 +34,18 @@ public class AdsIndexServlet extends HttpServlet {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         String date = formatter.format(now);
-        String[] catIds = request.getParameter("categoryId").split(" ");
-        List<Long> catList = new ArrayList<>();
-        for (String catId : catIds){
-            catList.add(Long.parseLong(catId));
+        List<Long> catIdList = new ArrayList<>();
+        for(int i = 1; i <= 20; i++) {
+            String paramString = String.format("cat-id-%d", i);
+            if(request.getParameter(paramString) != null) {
+                catIdList.add(Long.parseLong(request.getParameter(paramString)));
+            }
         }
+//        String[] catIds = request.getParameter("categoryId").split(" ");
+//        List<Long> catList = new ArrayList<>();
+//        for (String catId : catIds){
+//            catList.add(Long.parseLong(catId));
+//        }
         String imageText = "";
         if(request.getParameter("fileupload") == null) {
             imageText = "https://edit.co.uk/uploads/2016/12/Image-1-Alternatives-to-stock-photography-Thinkstock.jpg";
@@ -52,7 +59,7 @@ public class AdsIndexServlet extends HttpServlet {
                 Double.parseDouble(request.getParameter("price")),
                 date,
                 imageText,
-                catList
+                catIdList
         );
         DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");
@@ -90,11 +97,18 @@ public class AdsIndexServlet extends HttpServlet {
             response.sendRedirect("/ads");
             return;
         }
-        String[] catIds = request.getParameter("categoryId").split(" ");
         List<Long> catIdList = new ArrayList<>();
-        for (String catId : catIds){
-            catIdList.add(Long.parseLong(catId));
+        for(int i = 1; i <= 20; i++) {
+            String paramString = String.format("cat-id-%d", i);
+            if(request.getParameter(paramString) != null) {
+                catIdList.add(Long.parseLong(request.getParameter(paramString)));
+            }
         }
+//        String[] catIds = request.getParameter("categoryId").split(" ");
+//        List<Long> catIdList = new ArrayList<>();
+//        for (String catId : catIds){
+//            catIdList.add(Long.parseLong(catId));
+//        }
 
         ad.setTitle(request.getParameter("title"));
         ad.setDescription(request.getParameter("description"));
