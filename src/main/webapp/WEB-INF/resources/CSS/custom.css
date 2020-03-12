@@ -18,6 +18,7 @@ body {
 
 h1, h2, h3, h4, h5, h6{
     font-family: 'Cabin', sans-serif;
+    color: var(--main-font-color);
 }
 
 
@@ -152,7 +153,8 @@ img .card-img-top {
     font-family: 'Cabin', sans-serif;
 }
 
-.learn-btn {
+.update-button,
+.delete-button {
     font-size: 15px;
     color: var(--main-font-color);
     background: none;
@@ -162,14 +164,16 @@ img .card-img-top {
     width: 7rem;
 }
 
-.learn-btn:hover {
+.update-button:hover,
+.delete-button:hover {
     transform: scale(1.01);
     border: 0;
     background-color: #738bdc;
     background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
 }
 
-.learn-btn:focus,
+.update-button:focus,
+.delete-button:focus,
 .contact:focus,
 .close:focus,
 .navbar-toggler:focus {
@@ -243,24 +247,33 @@ i.fa-sign-in-alt{
     background-color: var(--primary-light-color);
 }
 
-#username, #password, #confirm_password, #email, #zipcode {
+#username, #password, #confirm_password, #email, #zipcode, #title, #price {
     background-color: var(--primary-color);
     color: var(--main-font-color);
     border: 1px var(--blue-color) solid ;
     border-radius: 50px;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
+#description {
+    background-color: var(--primary-color);
+    color: var(--main-font-color);
+    border: 1px var(--blue-color) solid ;
+    border-radius: 10px;
+    height: 15rem;
+    width: 20rem;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea[type=text]:focus{
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
     border: 1px solid rgba(81, 203, 238, 1);
 }
 
-input[type=text]:visited, input[type=password]:visited, input[type=email]:visited{
-    background-color: var(--primary-color);
-    color: var(--main-font-color);
-}
+/*input[type=text]:visited, input[type=password]:visited, input[type=email]:visited{*/
+/*    background-color: var(--primary-color);*/
+/*    color: var(--main-font-color);*/
+/*}*/
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], textarea[type=text] {
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -308,6 +321,10 @@ input[type=text], input[type=password], input[type=email] {
     background-color: #738bdc;
     background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.submit:focus{
+    outline: 0;
 }
 
 .container .login-container, .container .register-container{

@@ -79,7 +79,6 @@ public class AdsIndexServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        super.doPut(req, resp);
         User user = (User)request.getSession().getAttribute("user");
         if (user == null || !(user instanceof User) || DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
             response.sendRedirect("/login");
