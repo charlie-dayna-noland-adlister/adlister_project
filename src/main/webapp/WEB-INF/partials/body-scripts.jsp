@@ -4,12 +4,14 @@
     let deleteButtonClass = document.querySelectorAll(".delete-button");
     deleteButtonClass.forEach(button => {
         button.addEventListener("click", function() {
+            console.log("DELETED?");
             let idSplit = this.getAttribute("id").split("-");
             let adId = idSplit[1];
             fetch('http://localhost:8080/ads?id=' + adId, {
                 method: 'DELETE',
             })
                 .then(res => {
+                    console.log("DELETED?");
                     location.reload(true);
                 })
         })
