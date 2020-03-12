@@ -85,28 +85,32 @@ public class MySQLUsersDao implements Users {
         long userId = rs.getLong("id");
 
         try {
-            String query =  String.format("SELECT followed_id FROM users_followed WHERE user_id = %d", userId);
+            String query =  "SELECT followed_id FROM users_followed WHERE user_id = ?;";
             PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, userId);
             ResultSet resSet = stmt.executeQuery();
             if(resSet.next()) {
                 resSet.next();
                 while(resSet.next()) {
-                    followedList.add(resSet.getInt("1"));
+                    followedList.add(resSet.getInt(1));
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding a user by username", e);
+            throw new RuntimeException("Error extracting a user (followed)", e);
         }
         try {
-            String query =  String.format("SELECT ads_id FROM users_ads WHERE user_id = %d", userId);
+            String query =  "SELECT ads_id FROM users_ads WHERE user_id = ?;";
             PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, userId);
             ResultSet resSet = stmt.executeQuery();
-            resSet.next();
-            while(resSet.next()) {
-                wishList.add(resSet.getInt("1"));
+            if(resSet.next()) {
+                resSet.next();
+                while(resSet.next()) {
+                    wishList.add(resSet.getInt(1));
+                }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding a user by username", e);
+            throw new RuntimeException("Error finding a user (WishList)", e);
         }
         boolean isAdmin = 1 == rs.getInt("is_admin");
 
