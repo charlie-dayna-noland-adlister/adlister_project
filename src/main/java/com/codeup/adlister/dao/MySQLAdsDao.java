@@ -1,6 +1,8 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Review;
+import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -74,20 +76,57 @@ public class MySQLAdsDao implements Ads {
     private Ad extractAd(ResultSet rs) throws SQLException {
         long adId = rs.getLong("id");
 
-        List<Long> categoryList = new ArrayList<>();
+        List<Long> categoryIdList = new ArrayList<>();
         try {
             String categoryId = "SELECT categories_id FROM ads_categories WHERE ads_id = " + adId;
             PreparedStatement stmt = connection.prepareStatement(categoryId);
             ResultSet resSet = stmt.executeQuery();
             resSet.next();
             while (resSet.next()){
-                categoryList.add(resSet.getLong(1));
+                categoryIdList.add(resSet.getLong(1));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
-
-        List<Long> reportsList = new ArrayList<>();
+        List<String> categoryList = new ArrayList<>();
+        for(Long id : categoryIdList) {
+            try {
+                String categoryQuery = "SELECT type FROM categories WHERE id = ?;";
+                PreparedStatement stmt = connection.prepareStatement(categoryQuery);
+                stmt.setLong(1, id);
+                ResultSet resSet = stmt.executeQuery();
+                resSet.next();
+                categoryList.add(resSet.getString(1));
+            } catch (SQLException e) {
+                throw new RuntimeException("Error creating a new ad.", e);
+            }
+        }
+        List<Long> reviewIdList = new ArrayList<>();
+        try {
+            String reviewIdQuery = "SELECT reviews_id FROM ads_reviews WHERE ads_id = " + adId;
+            PreparedStatement stmt = connection.prepareStatement(reviewIdQuery);
+            ResultSet resSet = stmt.executeQuery();
+            resSet.next();
+            while (resSet.next()){
+                categoryIdList.add(resSet.getLong(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
+        }
+        List<Review> reviewList = new ArrayList<>();
+        for(Long id : reviewIdList) {
+            try {
+                String categoryQuery = "SELECT * FROM reviews WHERE id = ?;";
+                PreparedStatement stmt = connection.prepareStatement(categoryQuery);
+                stmt.setLong(1, id);
+                ResultSet resSet = stmt.executeQuery();
+                resSet.next();
+                reviewList.add(DaoFactory.getReviewsDao().findById(id));
+            } catch (SQLException e) {
+                throw new RuntimeException("Error creating a new ad.", e);
+            }
+        }
+        List<Long> usersReportedIdList = new ArrayList<>();
         try {
             String reportsId = "SELECT reported_user_id FROM ads_reported_users WHERE ads_id = " + adId;
             PreparedStatement stmt = connection.prepareStatement(reportsId);
@@ -95,10 +134,23 @@ public class MySQLAdsDao implements Ads {
             ResultSet resSet = stmt.executeQuery();
             resSet.next();
             while (resSet.next()){
-                reportsList.add(resSet.getLong(1));
+                usersReportedIdList.add(resSet.getLong(1));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
+        }
+        List<User> usersReportedList = new ArrayList<>();
+        for(Long id : usersReportedIdList) {
+            try {
+                String userReportedQuery = "SELECT * FROM users WHERE id = ?;";
+                PreparedStatement stmt = connection.prepareStatement(userReportedQuery);
+                stmt.setLong(1, id);
+                ResultSet resSet = stmt.executeQuery();
+                resSet.next();
+                usersReportedList.add(DaoFactory.getUsersDao().findById(id));
+            } catch (SQLException e) {
+                throw new RuntimeException("Error creating a new ad.", e);
+            }
         }
 
         return new Ad(
@@ -110,9 +162,13 @@ public class MySQLAdsDao implements Ads {
             rs.getString("date_posted"),
             rs.getString("image_text"),
             rs.getInt("review_avr"),
+            categoryIdList,
             categoryList,
+            reviewIdList,
+            reviewList,
             rs.getInt("quantity_reported"),
-            reportsList
+            usersReportedIdList,
+                usersReportedList
         );
     }
 
@@ -124,7 +180,7 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
     private void addCategories (Ad ad) throws SQLException {
-        for(Long catId : ad.getCategoryId()) {
+        for(Long catId : ad.getCategoryIdList()) {
             String insertStatement = "INSERT INTO ads_categories(ads_id, categories_id) VALUES (?, ?);";
             PreparedStatement catStmt= connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
             catStmt.setLong(1, ad.getId());
