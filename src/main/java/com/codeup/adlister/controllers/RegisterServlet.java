@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getSession().getAttribute("user") != null) {
-            //Maybe some error redirect?
+            response.sendRedirect("/profile");
             return;
         }
         String username = request.getParameter("username");
@@ -40,6 +40,7 @@ public class RegisterServlet extends HttpServlet {
         Matcher matcher = pattern.matcher(password);
         if (username.matches("\\W+") || !matcher.matches() || !password.equals(password) || !email.matches(".+@.+\\.[a-z]{3,4}") || !zipcode.matches("[0-9]{5}")) {
             //CHANGE TO ERROR HANDLING
+            response.sendRedirect("/register");
             return;
         }
         // create and save a new user
@@ -51,14 +52,7 @@ public class RegisterServlet extends HttpServlet {
                 Integer.parseInt(zipcode)
         );
         long userId = DaoFactory.getUsersDao().insert(user);
-//        user = new User(
-//                userId,
-//                username,
-//                email,
-//                password,
-//                request.getParameter("fileupload"), //change this name(id),
-//                Integer.parseInt(zipcode)
-//        );
+
         user.setId(userId);
         request.getSession().setAttribute("user", user);
         response.sendRedirect("/profile");

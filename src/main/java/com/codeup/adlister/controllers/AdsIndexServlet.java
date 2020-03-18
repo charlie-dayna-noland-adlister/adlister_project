@@ -20,7 +20,7 @@ public class AdsIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ads/test-index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
         return;
     }
     @Override
@@ -41,11 +41,6 @@ public class AdsIndexServlet extends HttpServlet {
                 catIdList.add(Long.parseLong(request.getParameter(paramString)));
             }
         }
-//        String[] catIds = request.getParameter("categoryId").split(" ");
-//        List<Long> catList = new ArrayList<>();
-//        for (String catId : catIds){
-//            catList.add(Long.parseLong(catId));
-//        }
         String imageText = "";
         if(request.getParameter("fileupload") == null) {
             imageText = "https://edit.co.uk/uploads/2016/12/Image-1-Alternatives-to-stock-photography-Thinkstock.jpg";

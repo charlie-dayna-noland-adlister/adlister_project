@@ -17,8 +17,8 @@
     <div class="container create-container text-center">
         <div class="row">
             <div class="col">
-                <h1 class="text-light">Create a new Ad</h1>
-                <form action="/ads" method="post">
+                <h1 class="text-light">Update your Ad</h1>
+                <form action="/ads" method="put">
                     <div class="form-group m-0">
                         <label for="title"></label>
                         <input id="title" name="title" class="text-center" type="text" placeholder="Title">
@@ -33,11 +33,6 @@
                         <input id="price" name="price" class="text-center" type="text" step="0.01" min="0"
                                placeholder="Price">
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="categoryId"></label>--%>
-<%--                        <textarea id="categoryId" name="categoryId" class="" type="text"--%>
-<%--                                  placeholder="Category"></textarea>--%>
-<%--                    </div>--%>
                     <div class="form-group">
                         <button class="button photo-upload" type="button" id="picker">Upload Profile
                             Image</button>
@@ -53,8 +48,8 @@
         </div>
     </div>
 </div>
-
 <jsp:include page="/WEB-INF/partials/scripts.jsp"/>
 <jsp:include page="/WEB-INF/partials/body-scripts.jsp"/>
 </body>
 </html>
+

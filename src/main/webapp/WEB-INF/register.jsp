@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="zipcode"></label>
-                        <input id="zipcode" name="zipcode" class="text-center" type="text" placeholder="Zicode">
+                        <input id="zipcode" name="zipcode" class="text-center" type="text" placeholder="Zipcode">
                     </div>
                     <div class="form-group">
                         <button class="button photo-upload" type="button" id="picker">Upload Profile

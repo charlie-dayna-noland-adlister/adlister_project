@@ -4,19 +4,31 @@
     let deleteButtonClass = document.querySelectorAll(".delete-button");
     deleteButtonClass.forEach(button => {
         button.addEventListener("click", function() {
-            console.log("DELETED?");
             let idSplit = this.getAttribute("id").split("-");
             let adId = idSplit[1];
             fetch('http://localhost:8080/ads?id=' + adId, {
                 method: 'DELETE',
             })
                 .then(res => {
-                    console.log("DELETED?");
                     location.reload(true);
                 })
         })
     })
-
+    <%--let updateButtonClass = document.querySelectorAll(".update-button");--%>
+    <%--updateButtonClass.forEach(button => {--%>
+    <%--    button.addEventListener("click", function() {--%>
+    <%--        let idSplit = this.getAttribute("id").split("-");--%>
+    <%--        let adId = idSplit[1];--%>
+    <%--        fetchString = `http://localhost:8080/ads?id=${adId}&description=${adDescription}&price=${adPrice}`;--%>
+    <%--        for()--%>
+    <%--        fetch(fetchString,{--%>
+    <%--            method: 'PUT',--%>
+    <%--        })--%>
+    <%--            .then(res => {--%>
+    <%--                location.reload(true);--%>
+    <%--            })--%>
+    <%--    })--%>
+    <%--})--%>
     //delete review
     let deleteReviewButtonClass = document.querySelectorAll(".delete-review-button");
     deleteReviewButtonClass.forEach(button => {

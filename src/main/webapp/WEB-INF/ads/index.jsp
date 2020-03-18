@@ -45,7 +45,6 @@
                             <button type="button" class="delete-button py-0 pl-2 mb-2" id="delete-${ad.id}">
                                 Delete Ad
                             </button>
-
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="modal-${ad.id}" tabindex="-1" role="dialog"
